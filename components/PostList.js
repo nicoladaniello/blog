@@ -6,9 +6,7 @@ export const allPostsQuery = gql`
   query allPosts($first: Int, $before: String, $after: String) {
     posts(first: $first, before: $before, after: $after) {
       pageInfo {
-        hasPreviousPage
         hasNextPage
-        startCursor
         endCursor
       }
       edges {
@@ -24,6 +22,7 @@ export const allPostsQuery = gql`
     }
   }
 `;
+
 export const allPostsQueryVars = {
   first: 10,
   after: null
@@ -36,12 +35,7 @@ export default function PostList() {
         if (error) return <ErrorMessage message="Error loading posts." />;
         if (loading) return <div>Loading</div>;
 
-        const {
-          hasPreviousPage,
-          hasNextPage,
-          startCursor,
-          endCursor
-        } = posts.pageInfo;
+        const { hasNextPage, endCursor } = posts.pageInfo;
         return (
           <section>
             <ul>
