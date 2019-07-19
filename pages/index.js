@@ -1,13 +1,11 @@
-import Link from "next/link";
 import Header from "../components/Header";
+import PostList from "../components/PostList";
 
 const Index = () => (
   <div>
     <Header />
     <p>Hello Next.js</p>
-    <Link href="/post/[postId]" as="/post/first-post">
-      <a>First Post</a>
-    </Link>
+    <PostList />
   </div>
 );
 
