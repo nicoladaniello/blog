@@ -1,24 +1,14 @@
 import React from "react";
-import Link from "next/link";
-
-const PostLink = props => (
-  <li>
-    <Link href="/posts/[id]" as={`/posts/${props.id}`}>
-      <a>{props.id}</a>
-    </Link>
-  </li>
-);
+import Header from "../components/Header";
+import PostList from "../components/PostList";
 
 const Posts = () => {
   return (
-    <>
-      <h1>My Blog</h1>
-      <ul>
-        <PostLink id="hello-nextjs" />
-        <PostLink id="learn-nextjs" />
-        <PostLink id="deploy-nextjs" />
-      </ul>
-    </>
+    <div>
+      <Header />
+      <h1>Posts</h1>
+      <PostList />
+    </div>
   );
 };
 
