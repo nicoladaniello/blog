@@ -1,6 +1,7 @@
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import ErrorMessage from "./ErrorMessage";
+import Link from "next/link";
 
 export const allCategoriesQuery = gql`
   query allCategories($first: Int, $before: String, $after: String) {
@@ -42,7 +43,12 @@ export default function CategoryList() {
                 <li key={cat.id}>
                   <div>
                     <span>{index + 1}. </span>
-                    <a href={`/categories/${cat.slug}`}>{cat.name}</a>
+                    <Link
+                      href="/categories/[slug]"
+                      as={`/categories/${cat.slug}`}
+                    >
+                      <a>{cat.name}</a>
+                    </Link>
                   </div>
                 </li>
               ))}

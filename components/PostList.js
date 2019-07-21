@@ -1,4 +1,5 @@
 import { Query } from "react-apollo";
+import Link from "next/link";
 import gql from "graphql-tag";
 import ErrorMessage from "./ErrorMessage";
 
@@ -43,7 +44,9 @@ export default function PostList() {
                 <li key={post.id}>
                   <div>
                     <span>{index + 1}. </span>
-                    <a href={`/posts/${post.uri}`}>{post.title}</a>
+                    <Link href="/posts/[uri]" as={`/posts/${post.uri}`}>
+                      <a>{post.title}</a>
+                    </Link>
                   </div>
                 </li>
               ))}
