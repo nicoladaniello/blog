@@ -1,4 +1,4 @@
-import { useRouter } from "next/router";
+import { withRouter } from "next/router";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import ErrorMessage from "../../components/ErrorMessage";
@@ -34,8 +34,7 @@ export const postByUriQuery = gql`
   }
 `;
 
-const Post = () => {
-  const router = useRouter();
+const Post = ({ router }) => {
   const { uri } = router.query;
 
   return (
@@ -46,13 +45,12 @@ const Post = () => {
           if (error) return <ErrorMessage message="Error loading posts." />;
           if (loading) return <div>Loading</div>;
 
-          console.log(postBy);
-
           const { title, content, date, author } = postBy;
           return (
             <section>
               <h1>{title}</h1>
               <p>
+                <u>{date} </u>
                 <small>{new Date(date).toLocaleDateString()}</small>
               </p>
               <div dangerouslySetInnerHTML={{ __html: content }} />
@@ -68,4 +66,4 @@ const Post = () => {
   );
 };
 
-export default Post;
+export default withRouter(Post);
