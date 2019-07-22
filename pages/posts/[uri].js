@@ -2,7 +2,7 @@ import { withRouter } from "next/router";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import ErrorMessage from "../../components/ErrorMessage";
-import Header from "../../components/Header";
+import Layout from "../../components/Layout";
 
 export const postByUriQuery = gql`
   query postByUri($uri: String!) {
@@ -38,8 +38,7 @@ const Post = ({ router }) => {
   const { uri } = router.query;
 
   return (
-    <div>
-      <Header />
+    <Layout>
       <Query query={postByUriQuery} variables={{ uri }}>
         {({ loading, error, data: { postBy } }) => {
           if (error) return <ErrorMessage message="Error loading posts." />;
@@ -62,7 +61,7 @@ const Post = ({ router }) => {
           );
         }}
       </Query>
-    </div>
+    </Layout>
   );
 };
 

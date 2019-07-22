@@ -1,14 +1,13 @@
 import React from "react";
-import Header from "../components/Header";
+import Layout from "../components/Layout";
 import CategoryList from "../components/CategoryList";
 
 const Categories = () => {
   return (
-    <div>
-      <Header />
+    <Layout>
       <h1>Categories</h1>
       <CategoryList />
-    </div>
+    </Layout>
   );
 };
 

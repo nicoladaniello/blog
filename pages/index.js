@@ -1,12 +1,11 @@
-import Header from "../components/Header";
 import PostList from "../components/PostList";
+import Layout from "../components/Layout";
 
 const Index = () => (
-  <div>
-    <Header />
+  <Layout>
     <p>Hello Next.js</p>
     <PostList />
-  </div>
+  </Layout>
 );
 
 export default Index;

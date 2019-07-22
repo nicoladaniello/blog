@@ -2,8 +2,8 @@ import { withRouter } from "next/router";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import ErrorMessage from "../../components/ErrorMessage";
-import Header from "../../components/Header";
 import Link from "next/link";
+import Layout from "../../components/Layout";
 
 export const categoryBySlugQuery = gql`
   query categoryBySlug($slug: String!, $afterPost: String) {
@@ -43,8 +43,7 @@ const Category = ({ router }) => {
   const { slug } = router.query;
 
   return (
-    <div>
-      <Header />
+    <Layout>
       <Query query={categoryBySlugQuery} variables={{ slug }}>
         {({ loading, error, data: { categories }, fetchMore }) => {
           if (error) return <ErrorMessage message="Error loading Category." />;
@@ -91,7 +90,7 @@ const Category = ({ router }) => {
           );
         }}
       </Query>
-    </div>
+    </Layout>
   );
 };
 

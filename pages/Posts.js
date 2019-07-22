@@ -1,14 +1,13 @@
 import React from "react";
-import Header from "../components/Header";
+import Layout from "../components/Layout";
 import PostList from "../components/PostList";
 
 const Posts = () => {
   return (
-    <div>
-      <Header />
+    <Layout>
       <h1>Posts</h1>
       <PostList />
-    </div>
+    </Layout>
   );
 };
 
