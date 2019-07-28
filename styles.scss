@@ -1,1 +1,120 @@
+// options
+$enable-responsive-font-sizes: true;
+
+// colors
+$dark: #212529;
+
+// spacer
+$spacer: 1.5rem;
+
+// fonts
+$font-size-base: 1rem;
+$font-size-xs: $font-size-base * 0.65;
+$line-height-base: 1.75;
+$headings-margin-bottom: $spacer;
+$headings-font-weight: 400;
+
+// borders
+$border-radius: 0.125rem;
+
+// navbar
+$navbar-nav-link-padding-x: 0.9rem;
+
+// shadows
+$box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.3);
+
 @import "~bootstrap/scss/bootstrap.scss";
+
+html,
+body {
+  background-color: #fafafa;
+}
+
+$bg-gradient: linear-gradient(rgba(#000, $alpha: 0), rgba(#000, $alpha: 1));
+$tile-gradient: linear-gradient(
+  rgba(#000, $alpha: 0) 60%,
+  rgba(#000, $alpha: 0.8)
+);
+
+.jumbotron {
+  background-color: transparent;
+}
+
+.jumbotron-header {
+  position: relative;
+  min-height: 60vh;
+  padding: 0px 0px;
+}
+
+.jumbotron-image {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.jumbotron-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding-top: 8rem;
+  padding-bottom: 4rem;
+  background-color: rgba($dark, 0.6);
+  // background: $bg-gradient;
+}
+
+.card {
+  background-color: transparent;
+  border: none;
+
+  .card-img,
+  .card-img-top {
+    box-shadow: $box-shadow;
+  }
+}
+
+a.card-title:hover {
+  text-decoration: none;
+}
+
+.tile {
+  .card-title {
+    color: $light;
+  }
+
+  .card-img {
+    width: auto;
+    max-width: 100%;
+    object-fit: cover;
+  }
+
+  .card-img-overlay {
+    display: flex;
+    align-items: flex-end;
+    background: $tile-gradient;
+  }
+}
+
+.footer {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.navbar-header {
+  position: absolute;
+  top: 1rem;
+  left: 0;
+  right: 0;
+}
+
+.navbar .nav-link {
+  font-size: $font-size-xs;
+  text-transform: uppercase;
+  transition: all 0.2s ease-out;
+
+  &:hover {
+    background-color: rgba($light, 0.5);
+    border-radius: $border-radius;
+  }
+}

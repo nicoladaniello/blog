@@ -1,16 +1,29 @@
+import { Fragment } from "react";
+import Head from "next/head";
+import Footer from "./Footer";
 import Header from "./Header";
 
-const layoutStyle = {
-  margin: 20,
-  padding: 20,
-  border: "1px solid #DDD"
-};
+const Layout = ({ title, headerData, children }) => (
+  <Fragment>
+    <Head>
+      <title>{title}</title>
+      <style>
+        {`
+      @font-face {
+        font-family: 'Foo';
+        src: url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+      }
 
-const Layout = ({ children }) => (
-  <div style={layoutStyle}>
-    <Header />
-    {children}
-  </div>
+      body {
+        font-family: 'Montserrat', sans-serif;
+      }
+    `}
+      </style>
+    </Head>
+    <Header data={headerData} />
+    <main>{children}</main>
+    <Footer />
+  </Fragment>
 );
 
 export default Layout;

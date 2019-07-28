@@ -1,7 +1,8 @@
 import App, { Container } from "next/app";
-import React from "react";
 import withApolloClient from "../lib/with-apollo-client";
 import { ApolloProvider } from "react-apollo";
+import SettingsProvider from "../providers/SettingsProvider";
+
 import "../styles.scss";
 
 class MyApp extends App {
@@ -10,7 +11,9 @@ class MyApp extends App {
     return (
       <Container>
         <ApolloProvider client={apolloClient}>
-          <Component {...pageProps} />
+          <SettingsProvider>
+            <Component {...pageProps} />
+          </SettingsProvider>
         </ApolloProvider>
       </Container>
     );
