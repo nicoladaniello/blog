@@ -1,11 +1,10 @@
 import React from "react";
-import Layout from "../../components/Layout";
+import Layout from "../../components/common/Layout";
 import PostList from "../../components/PostList";
 
-const Posts = () => {
+const Posts = ({ layoutProps }) => {
   return (
-    <Layout>
-      <h1>Posts</h1>
+    <Layout {...layoutProps}>
       <PostList />
     </Layout>
   );

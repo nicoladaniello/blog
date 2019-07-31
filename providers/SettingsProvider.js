@@ -1,45 +1,12 @@
-import { Query } from "react-apollo";
-import gql from "graphql-tag";
-import ErrorMessage from "../components/ErrorMessage";
+import withSettings from "../containers/withSettings";
 import SettingsContext from "./SettingsContext";
 
-export const allSettingsQuery = gql`
-  query allSettings {
-    allSettings {
-      discussionSettingsDefaultCommentStatus
-      discussionSettingsDefaultPingStatus
-      generalSettingsDateFormat
-      generalSettingsDescription
-      generalSettingsLanguage
-      generalSettingsStartOfWeek
-      generalSettingsTimeFormat
-      generalSettingsTimezone
-      generalSettingsTitle
-      generalSettingsUrl
-      readingSettingsPostsPerPage
-      writingSettingsDefaultCategory
-      writingSettingsDefaultPostFormat
-      writingSettingsUseSmilies
-    }
-  }
-`;
-
-const SettingsProvider = ({ children }) => {
+const SettingsProvider = ({ settings, children }) => {
   return (
-    <Query query={allSettingsQuery}>
-      {({ loading, data: { allSettings }, error }) => {
-        if (error)
-          return <ErrorMessage message={`Error loading settings. ${error}`} />;
-        if (loading) return <div>Loading</div>;
-
-        return (
-          <SettingsContext.Provider value={allSettings}>
-            {children}
-          </SettingsContext.Provider>
-        );
-      }}
-    </Query>
+    <SettingsContext.Provider value={settings}>
+      {children}
+    </SettingsContext.Provider>
   );
 };
 
-export default SettingsProvider;
+export default withSettings(SettingsProvider);

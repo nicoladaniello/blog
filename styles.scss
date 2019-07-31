@@ -25,9 +25,8 @@ $box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.3);
 
 @import "~bootstrap/scss/bootstrap.scss";
 
-html,
-body {
-  background-color: #fafafa;
+main {
+  min-height: 40vh;
 }
 
 $bg-gradient: linear-gradient(rgba(#000, $alpha: 0), rgba(#000, $alpha: 1));
@@ -37,27 +36,23 @@ $tile-gradient: linear-gradient(
 );
 
 .jumbotron {
-  background-color: transparent;
+  // background-color: transparent;
 }
 
 .jumbotron-header {
-  position: relative;
-  min-height: 60vh;
-  padding: 0px 0px;
+  padding-top: 8rem;
 }
 
 .jumbotron-image {
+  height: 30vw;
+  min-height: 30vw;
+  padding: 0px 0px;
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
 }
 
 .jumbotron-overlay {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
   padding-top: 8rem;
   padding-bottom: 4rem;
   background-color: rgba($dark, 0.6);
@@ -65,12 +60,37 @@ $tile-gradient: linear-gradient(
 }
 
 .card {
-  background-color: transparent;
-  border: none;
+  box-shadow: $box-shadow;
 
-  .card-img,
-  .card-img-top {
-    box-shadow: $box-shadow;
+  &.card-transparent {
+    box-shadow: none;
+    background-color: transparent;
+    border: none;
+
+    .card-img,
+    .card-img-top {
+      box-shadow: $box-shadow;
+    }
+  }
+
+  .card-title {
+    font-weight: bold;
+  }
+
+  .card-text {
+    @extend .text-muted;
+    @extend .small;
+  }
+
+  .card-img-avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    margin: 2rem auto 0rem auto;
+
+    + .card-body .card-title {
+      text-align: center;
+    }
   }
 }
 
@@ -97,6 +117,7 @@ a.card-title:hover {
 }
 
 .footer {
+  border-top: $border-width solid $border-color;
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
@@ -116,5 +137,23 @@ a.card-title:hover {
   &:hover {
     background-color: rgba($light, 0.5);
     border-radius: $border-radius;
+  }
+}
+
+.card-columns.two-columns {
+  @include media-breakpoint-only(xl) {
+    column-count: 2;
+  }
+  @include media-breakpoint-only(lg) {
+    column-count: 2;
+  }
+  @include media-breakpoint-only(md) {
+    column-count: 2;
+  }
+  @include media-breakpoint-only(sm) {
+    column-count: 1;
+  }
+  @include media-breakpoint-only(xs) {
+    column-count: 1;
   }
 }
