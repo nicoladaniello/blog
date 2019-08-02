@@ -17,6 +17,7 @@
     "apollo-boost": "^0.4.3",
     "bootstrap": "^4.3.1",
     "classnames": "^2.2.6",
+    "eslint-plugin-react-hooks": "^1.6.1",
     "graphql": "^14.4.2",
     "isomorphic-unfetch": "^3.0.0",
     "next": "^9.0.1",
@@ -27,6 +28,8 @@
     "recompose": "^0.30.0"
   },
   "devDependencies": {
-    "@storybook/react": "^5.1.9"
+    "@storybook/react": "^5.1.9",
+    "eslint": "^6.1.0",
+    "eslint-plugin-react": "^7.14.3"
   }
 }

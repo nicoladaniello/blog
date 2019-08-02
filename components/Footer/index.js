@@ -1,17 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
+import Link from "next/link";
 import classnames from "classnames";
-
-import Link from "../Link";
 import NavbarMenu from "../NavbarMenu";
+import withMenuItems from "../../containers/withMenuItems";
+import SettingsContext from "../../providers/SettingsContext";
 
-const Footer = ({
-  settings: { title } = {},
-  menu = {},
-  note,
-  dark,
-  className,
-  ...rest
-}) => {
+const Footer = ({ menuItems, note, dark, className, ...rest }) => {
+  const settings = useContext(SettingsContext);
+
   return (
     <footer className="footer">
       <nav
@@ -23,13 +19,15 @@ const Footer = ({
         {...rest}
       >
         <div className="container">
-          {title && (
-            <Link href="/">
-              <a className="navbar-brand">{title}</a>
-            </Link>
-          )}
+          <Link href="/">
+            <a className="navbar-brand">
+              {settings ? settings.generalSettingsTitle : "Home"}
+            </a>
+          </Link>
 
-          <NavbarMenu menu={menu} className="mx-auto" />
+          {menuItems && (
+            <NavbarMenu menuItems={menuItems} className="mx-auto" />
+          )}
 
           <p className="navbar-text ml-auto my-auto">
             <small dangerouslySetInnerHTML={{ __html: note }} />
@@ -40,4 +38,4 @@ const Footer = ({
   );
 };
 
-export default Footer;
+export default withMenuItems("FOOTER_MENU")(Footer);

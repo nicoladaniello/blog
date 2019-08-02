@@ -1,45 +1,42 @@
 import React, { useContext } from "react";
-import classnames from "classnames";
-import NavbarMenu from "../NavbarMenu/index";
 import Link from "next/link";
-import NavbarContext from "../../providers/NavbarContext";
+import classnames from "classnames";
 
-const Navbar = ({
-  settings: { title } = {},
-  menu = {},
-  dark,
-  className,
-  ...rest
-}) => {
-  const navbar = useContext(NavbarContext);
-  console.log(navbar);
+import NavbarMenu from "../NavbarMenu/index";
+import SettingsContext from "../../providers/SettingsContext";
+import withMenuItems from "../../containers/withMenuItems";
+
+const Navbar = ({ menuItems, dark, className, ...rest }) => {
+  const settings = useContext(SettingsContext);
 
   return (
     <nav
       className={classnames(
-        "navbar navbar-expand-md",
+        "navbar navbar-expand-lg",
         { "navbar-light": !dark, "navbar-dark": dark },
         className
       )}
       {...rest}
     >
       <div className="container">
-        {title && (
-          <Link href="/">
-            <a className="navbar-brand">{title}</a>
-          </Link>
-        )}
+        <Link href="/">
+          <a className="navbar-brand">
+            {settings ? settings.generalSettingsTitle : "Home"}
+          </a>
+        </Link>
 
         <button className="navbar-toggler" type="button">
           <span className="navbar-toggler-icon" />
         </button>
 
         <div className="collapse navbar-collapse">
-          <NavbarMenu menu={menu} className="ml-auto" />
+          {menuItems && (
+            <NavbarMenu menuItems={menuItems} className="ml-auto" />
+          )}
         </div>
       </div>
     </nav>
   );
 };
 
-export default Navbar;
+export default withMenuItems("NAVBAR_MENU")(Navbar);

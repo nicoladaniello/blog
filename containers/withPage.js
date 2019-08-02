@@ -11,6 +11,9 @@ export const getPage = gql`
       pageId
       title
       content
+      featuredImage {
+        sourceUrl
+      }
     }
   }
 `;

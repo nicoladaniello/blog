@@ -3,12 +3,7 @@ import Head from "next/head";
 import Footer from "../../Footer/index.js";
 import Header from "../../Header/index.js";
 
-const Layout = ({
-  page = {},
-  navbarProps = {},
-  footerProps = {},
-  children
-}) => (
+const Layout = ({ page = {}, children }) => (
   <Fragment>
     <Head>
       {page.title && <title>{page.title}</title>}
@@ -25,7 +20,7 @@ const Layout = ({
     `}
       </style>
     </Head>
-    <Header page={page} navbarProps={navbarProps} />
+    <Header page={page} />
     <main>
       <div className="container">
         <div className="row">
@@ -37,7 +32,7 @@ const Layout = ({
         </div>
       </div>
     </main>
-    <Footer {...footerProps} />
+    <Footer />
   </Fragment>
 );
 

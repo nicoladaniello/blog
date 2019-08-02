@@ -1,3 +1,4 @@
+import React from "react";
 import { branch, renderComponent } from "recompose";
 
 const renderWhenLoading = () =>

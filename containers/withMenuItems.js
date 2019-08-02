@@ -4,7 +4,7 @@ import { compose } from "recompose";
 import renderWhenLoading from "./renderWhenLoading";
 import renderWhenError from "./renderWhenError";
 
-const getMenuItems = gql`
+export const getMenuItems = gql`
   query getMenuItems($location: MenuLocationEnum) {
     menuItems(where: { location: $location }) {
       nodes {
@@ -12,6 +12,14 @@ const getMenuItems = gql`
         menuItemId
         label
         url
+        childItems {
+          nodes {
+            id
+            menuItemId
+            label
+            url
+          }
+        }
       }
     }
   }
@@ -21,9 +29,17 @@ const withMenuItems = location =>
   compose(
     graphql(getMenuItems, {
       options: { variables: { location } },
-      props: ({ data }) => ({
-        menuItems: data.menuItems ? data.menuItems.nodes : null
-      })
+      props: ({ data }) => {
+        if (!data.menuItems) return null;
+        return {
+          menuItems: [
+            ...data.menuItems.nodes.map(item => {
+              if (item.childItems)
+                return { ...item, childItems: item.childItems.nodes };
+            })
+          ]
+        };
+      }
     }),
     renderWhenLoading(),
     renderWhenError()

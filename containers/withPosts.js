@@ -4,7 +4,7 @@ import { compose } from "recompose";
 import renderWhenLoading from "./renderWhenLoading";
 import renderWhenError from "./renderWhenError";
 
-const postsQuery = gql`
+export const getPosts = gql`
   query postsQuery($first: Int, $before: String, $after: String) {
     posts(first: $first, before: $before, after: $after) {
       pageInfo {
@@ -21,12 +21,14 @@ const postsQuery = gql`
         title
         excerpt
         featuredImage {
+          id
           sourceUrl
           srcSet
           sizes
           altText
         }
         author {
+          id
           name
           nicename
         }
@@ -60,10 +62,10 @@ function loadMorePosts({ posts: { pageInfo }, fetchMore }, vars) {
 }
 
 const withPosts = variables =>
-  compose(
-    graphql(postsQuery, {
-      options: { variables },
-      props: ({ data = {} }) => ({
+  graphql(getPosts, {
+    options: { variables },
+    props: ({ data = {} }) => {
+      return {
         posts: {
           pageInfo: data.posts ? data.posts.pageInfo : null,
           posts: data.posts ? data.posts.nodes : null,
@@ -71,9 +73,7 @@ const withPosts = variables =>
             loadMorePosts(data, variables);
           }
         }
-      })
-    }),
-    renderWhenLoading(),
-    renderWhenError()
-  );
+      };
+    }
+  });
 export default withPosts;

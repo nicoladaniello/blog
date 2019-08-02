@@ -1,3 +1,4 @@
+import React from "react";
 import withSettings from "../containers/withSettings";
 import SettingsContext from "./SettingsContext";
 

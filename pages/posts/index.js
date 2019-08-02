@@ -1,13 +1,19 @@
 import React from "react";
+import { compose } from "recompose";
+import withPage from "../../containers/withPage";
+import withPosts from "../../containers/withPosts";
 import Layout from "../../components/common/Layout";
 import PostList from "../../components/PostList";
 
-const Posts = ({ layoutProps }) => {
+const Posts = ({ page, posts }) => {
   return (
-    <Layout {...layoutProps}>
-      <PostList />
+    <Layout page={page}>
+      <PostList data={posts} />
     </Layout>
   );
 };
 
-export default Posts;
+export default compose(
+  withPage("posts"),
+  withPosts()
+)(Posts);

@@ -1,22 +1,24 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
+import { MockedProvider } from "react-apollo/test-utils";
+import { StorybookRouterFix } from "../../../.storybook/mockNextRouter.js";
+import { NavbarMenuMocks } from "../../Navbar/index.stories.js";
+import { FooterMenuMocks } from "../../Footer/index.stories.js";
+import { page } from "../../Header/index.stories.js";
 import Layout from "./index.js";
 
-import { StorybookRouterFix } from "../../../.storybook/mockNextRouter.js";
-import { page } from "../../Header/index.stories.js";
-import { navbarProps } from "../../Navbar/index.stories.js";
-import { footerProps } from "../../Footer/index.stories.js";
-
-export const layoutProps = {
-  page,
-  navbarProps,
-  footerProps
-};
-
 storiesOf("Layout", module)
+  .addDecorator(story => (
+    <MockedProvider
+      mocks={[...NavbarMenuMocks, ...FooterMenuMocks]}
+      addTypename={false}
+    >
+      {story()}
+    </MockedProvider>
+  ))
   .addDecorator(story => <StorybookRouterFix>{story()}</StorybookRouterFix>)
   .add("default", () => (
-    <Layout {...layoutProps}>
+    <Layout page={page}>
       <h2>Some extra content</h2>
       <p>Just to fill the space</p>
     </Layout>

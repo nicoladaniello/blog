@@ -129,7 +129,8 @@ a.card-title:hover {
   right: 0;
 }
 
-.navbar .nav-link {
+.navbar .nav-link,
+.navbar .dropdown-item {
   font-size: $font-size-xs;
   text-transform: uppercase;
   transition: all 0.2s ease-out;

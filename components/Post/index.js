@@ -6,9 +6,10 @@ import CardImage from "../common/Card/CardImage";
 import CardText from "../common/Card/CardText";
 import CardHorizontal from "../common/Card/CardHorizontal";
 import Category from "../Category";
+import Link from "next/link";
 
 const Post = ({
-  data: { title, category, featuredImage, excerpt },
+  data: { title, uri, category, featuredImage, excerpt },
   horizontal,
   className,
   ...rest
@@ -21,7 +22,13 @@ const Post = ({
   const body = (
     <CardBody>
       {category && <Category data={category} />}
-      {title && <CardTitle>{title}</CardTitle>}
+      {title && (
+        <CardTitle>
+          <Link href="/posts/[uri]" as={`/posts/${uri}`}>
+            <a>{title}</a>
+          </Link>
+        </CardTitle>
+      )}
       {excerpt && <CardText>{excerpt}</CardText>}
     </CardBody>
   );

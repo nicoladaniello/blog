@@ -1,10 +1,10 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import Header from "./index.js";
-
+import { MockedProvider } from "react-apollo/test-utils";
 import { StorybookRouterFix } from "../../.storybook/mockNextRouter.js";
 import { featuredImage } from "../common/Card/CardImage/index.stories.js";
-import { navbarProps } from "../Navbar/index.stories.js";
+import { NavbarMenuMocks } from "../Navbar/index.stories.js";
+import Header from "./index.js";
 
 export const page = {
   title: "Page title",
@@ -13,20 +13,17 @@ export const page = {
     "<h1>Page informations</h1><p>This is some content within the page</p>"
 };
 
-export const headerPage = {
-  page,
-  navbarProps
-};
-
-export const headerPropsWithImage = {
-  page: {
-    ...page,
-    featuredImage
-  },
-  navbarProps
+export const pageWithImage = {
+  ...page,
+  featuredImage
 };
 
 storiesOf("Header", module)
+  .addDecorator(story => (
+    <MockedProvider mocks={[...NavbarMenuMocks]} addTypename={false}>
+      {story()}
+    </MockedProvider>
+  ))
   .addDecorator(story => <StorybookRouterFix>{story()}</StorybookRouterFix>)
-  .add("default", () => <Header {...headerProps} />)
-  .add("with image", () => <Header {...headerPropsWithImage} />);
+  .add("default", () => <Header page={page} />)
+  .add("with image", () => <Header page={pageWithImage} />);

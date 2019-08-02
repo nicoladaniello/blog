@@ -1,20 +1,13 @@
 import React from "react";
 import classnames from "classnames";
-import Link from "next/link";
+import MenuItem from "./MenuItem";
 
-const NavbarMenu = ({ menu, className, ...rest }) => {
-  // const { generalSettingsUrl } = useContext(SettingsContext);
+const NavbarMenu = ({ menuItems = [], className, ...rest }) => {
   return (
     <ul className={classnames("navbar-nav", className)} {...rest}>
-      {menu &&
-        menu.menuItems &&
-        menu.menuItems.map(item => (
-          <li key={item.id} className="nav-item">
-            <Link href={item.url}>
-              <a className="nav-link">{item.label}</a>
-            </Link>
-          </li>
-        ))}
+      {menuItems.map(item => (
+        <MenuItem menuItem={item} />
+      ))}
     </ul>
   );
 };

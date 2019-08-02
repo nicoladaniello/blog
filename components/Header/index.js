@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "../Navbar/index.js";
 import classnames from "classnames";
 
-const Header = ({ page: { title, featuredImage } = {}, navbarProps }) => {
+const Header = ({ page: { title, featuredImage } = {} }) => {
   const jumboProps = {
     style: featuredImage
       ? { backgroundImage: `url('${featuredImage.sourceUrl}')` }
@@ -21,11 +21,7 @@ const Header = ({ page: { title, featuredImage } = {}, navbarProps }) => {
   return (
     <div {...jumboProps}>
       <div {...overlayProps}>
-        <Navbar
-          {...navbarProps}
-          dark={featuredImage}
-          className="navbar-header"
-        />
+        <Navbar dark={featuredImage} className="navbar-header" />
         <div className="container h-100">
           <div className="row h-100 align-items-center jusitfy-content-center">
             <div className="col-lg-6 col-md-8 col-sm-12">

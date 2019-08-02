@@ -4,7 +4,7 @@ import classnames from "classnames";
 const CardTitle = ({ className, children, ...rest }) => {
   return (
     <h5 className={classnames("card-title", className)} {...rest}>
-      <a>{children}</a>
+      {children}
     </h5>
   );
 };
