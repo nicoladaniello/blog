@@ -6,11 +6,11 @@ import { CategoryPropsData } from "../Category/index.stories";
 import Post from ".";
 
 export const postData = {
-  title: "A blog post in a card",
+  title: "A blog post title",
   uri: "fake/uri",
   excerpt: "Just some dummy content to fill up the screen",
-  featuredImage: { ...featuredImage },
-  category: { ...CategoryPropsData }
+  featuredImage,
+  category: CategoryPropsData
 };
 
 storiesOf("Post", module)

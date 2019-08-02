@@ -10,14 +10,19 @@ export const listGroupData = [
   { title: "item 4" }
 ];
 
+const renderItem = ({ item, className }) => (
+  <Link href="/">
+    <a className={className}>{item.title}</a>
+  </Link>
+);
+
 storiesOf("List Group", module)
   .addDecorator(story => <div className="p-5">{story()}</div>)
   .add("default", () => (
-    <ListGroup items={listGroupData}>
-      {({ item, className }) => (
-        <Link href="/">
-          <a className={className}>{item.title}</a>
-        </Link>
-      )}
+    <ListGroup items={listGroupData}>{renderItem}</ListGroup>
+  ))
+  .add("with flush", () => (
+    <ListGroup flush items={listGroupData}>
+      {renderItem}
     </ListGroup>
   ));

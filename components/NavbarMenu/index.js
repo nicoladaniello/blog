@@ -5,9 +5,8 @@ import MenuItem from "./MenuItem";
 const NavbarMenu = ({ menuItems = [], className, ...rest }) => {
   return (
     <ul className={classnames("navbar-nav", className)} {...rest}>
-      {menuItems.map(item => (
-        <MenuItem menuItem={item} />
-      ))}
+      {menuItems.length > 0 &&
+        menuItems.map(item => <MenuItem key={item.id} menuItem={item} />)}
     </ul>
   );
 };

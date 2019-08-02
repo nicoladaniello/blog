@@ -3,7 +3,7 @@ import classnames from "classnames";
 import Link from "next/link";
 
 const MenuItem = ({
-  menuItem: { id, url, label, childItems, className, ...rest } = {}
+  menuItem: { id, url, label, childItems, className } = {}
 }) => {
   let [toggle, setToggle] = useState(false);
   const hasChildItems = childItems.length > 0;
@@ -13,21 +13,15 @@ const MenuItem = ({
 
   return (
     <li
-      key={id}
-      className={classnames("nav-item", { dropdown: hasChildItems })}
+      className={classnames("nav-item", { dropdown: hasChildItems }, className)}
     >
       <Link href={url}>
         <a
-          className={classnames(
-            "nav-link",
-            {
-              "dropdown-toggle": hasChildItems
-            },
-            className
-          )}
+          className={classnames("nav-link", {
+            "dropdown-toggle": hasChildItems
+          })}
           onMouseOver={showMenu}
           onMouseLeave={hideMenu}
-          {...rest}
         >
           {label}
         </a>
