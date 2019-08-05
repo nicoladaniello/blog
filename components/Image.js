@@ -3,12 +3,13 @@ import classnames from "classnames";
 
 const Image = ({
   img: { srcSet, sizes, sourceUrl, altText },
+  avatar,
   className,
   ...rest
 }) => {
   return (
     <img
-      className={classnames("img-fluid", className)}
+      className={classnames("img-fluid", { avatar }, className)}
       srcSet={srcSet}
       sizes={sizes}
       src={sourceUrl}

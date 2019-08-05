@@ -1,12 +1,56 @@
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
-import { compose } from "recompose";
-import renderWhenLoading from "./renderWhenLoading";
-import renderWhenError from "./renderWhenError";
+
+export const postFields = gql`
+  fragment postFields on Post {
+    id
+    postId
+    uri
+    title
+    excerpt
+    date
+    featuredImage {
+      id
+      sourceUrl
+      srcSet
+      sizes
+      altText
+    }
+    author {
+      id
+      name
+      slug
+    }
+    tags {
+      nodes {
+        id
+        name
+        slug
+      }
+    }
+    categories {
+      nodes {
+        id
+        name
+        slug
+      }
+    }
+  }
+`;
 
 export const getPosts = gql`
-  query postsQuery($first: Int, $before: String, $after: String) {
-    posts(first: $first, before: $before, after: $after) {
+  query postsQuery(
+    $first: Int
+    $before: String
+    $after: String
+    $tagSlugIn: [String]
+  ) {
+    posts(
+      first: $first
+      before: $before
+      after: $after
+      where: { tagSlugIn: $tagSlugIn }
+    ) {
       pageInfo {
         hasPreviousPage
         hasNextPage
@@ -14,27 +58,11 @@ export const getPosts = gql`
         endCursor
       }
       nodes {
-        id
-        postId
-        slug
-        uri
-        title
-        excerpt
-        featuredImage {
-          id
-          sourceUrl
-          srcSet
-          sizes
-          altText
-        }
-        author {
-          id
-          name
-          nicename
-        }
+        ...postFields
       }
     }
   }
+  ${postFields}
 `;
 
 function loadMorePosts({ posts: { pageInfo }, fetchMore }, vars) {
@@ -61,19 +89,28 @@ function loadMorePosts({ posts: { pageInfo }, fetchMore }, vars) {
   });
 }
 
-const withPosts = variables =>
-  graphql(getPosts, {
-    options: { variables },
-    props: ({ data = {} }) => {
-      return {
-        posts: {
-          pageInfo: data.posts ? data.posts.pageInfo : null,
-          posts: data.posts ? data.posts.nodes : null,
-          onLoadMore: () => {
-            loadMorePosts(data, variables);
-          }
+const withPosts = graphql(getPosts, {
+  options: ({ variables }) => {
+    return { variables };
+  },
+  props: ({ data = {} }) => {
+    if (!data.posts || !data.posts.nodes.length) return { posts: null };
+
+    const pageInfo = data.posts.pageInfo;
+    const posts = data.posts.nodes;
+    return {
+      posts: {
+        pageInfo,
+        posts: posts.map(post => ({
+          ...post,
+          tags: post.tags.nodes,
+          category: post.categories.nodes[0]
+        })),
+        onLoadMore: () => {
+          loadMorePosts(data, variables);
         }
-      };
-    }
-  });
+      }
+    };
+  }
+});
 export default withPosts;

@@ -3,11 +3,16 @@ import Head from "next/head";
 import Footer from "../../Footer/index.js";
 import Header from "../../Header/index.js";
 import LayoutSidebar from "../../LayoutSidebar/index.js";
+import { stripHtml } from "../../../util.js";
 
-const Layout = ({ page = {}, children }) => (
+const Layout = ({ title, page = {}, children }) => (
   <Fragment>
     <Head>
-      {page.title && <title>{page.title}</title>}
+      {title ? (
+        <title>{title}</title>
+      ) : page.title ? (
+        <title>{stripHtml(page.title)}</title>
+      ) : null}
       <style>
         {`
       @font-face {
@@ -25,7 +30,7 @@ const Layout = ({ page = {}, children }) => (
     <main className="py-4">
       <div className="container">
         <div className="row justify-content-around">
-          <div className="col-lg-7 col-md-8 col-sm-8 col-xs-12">
+          <div className="col-md-8 col-xs-12">
             {!!page.content && (
               <section>
                 <div dangerouslySetInnerHTML={{ __html: page.content }} />
@@ -33,7 +38,7 @@ const Layout = ({ page = {}, children }) => (
             )}
             {children}
           </div>
-          <div className="col-lg-4 col-md-4 col-sm-4">
+          <div className="col">
             <LayoutSidebar />
           </div>
         </div>

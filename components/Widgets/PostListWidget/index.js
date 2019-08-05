@@ -4,9 +4,12 @@ import classnames from "classnames";
 import ListGroup from "../../common/ListGroup";
 import Image from "../../Image";
 
-const PostListWidget = ({ posts, title }) => {
+const PostListWidget = ({ posts, title, className }) => {
+  if (!posts || !posts.posts)
+    return <div className="alert alert-info">No posts to show</div>;
+
   return (
-    <div>
+    <div className={className}>
       {title && <h5 className="font-weight-bold">{title}</h5>}
       <ListGroup flush items={posts.posts}>
         {({ item, className }) => (

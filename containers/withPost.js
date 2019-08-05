@@ -36,6 +36,7 @@ const getPost = gql`
       author {
         id
         name
+        slug
         avatar {
           size
           url

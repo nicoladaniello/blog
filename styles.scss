@@ -11,6 +11,7 @@ $spacer: 1.5rem;
 $font-size-base: 1rem;
 $font-size-xs: $font-size-base * 0.65;
 $line-height-base: 1.75;
+$headings-line-height: 1.3;
 $headings-margin-bottom: $spacer;
 $headings-font-weight: 400;
 
@@ -35,10 +36,6 @@ $tile-gradient: linear-gradient(
   rgba(#000, $alpha: 0.8)
 );
 
-.jumbotron {
-  // background-color: transparent;
-}
-
 .jumbotron-header {
   padding-top: 8rem;
 }
@@ -52,6 +49,12 @@ $tile-gradient: linear-gradient(
   background-repeat: no-repeat;
 }
 
+.bg-cover {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
 .jumbotron-overlay {
   padding-top: 8rem;
   padding-bottom: 4rem;
@@ -60,7 +63,9 @@ $tile-gradient: linear-gradient(
 }
 
 .card {
-  box-shadow: $box-shadow;
+  &.card-shadow {
+    box-shadow: $box-shadow;
+  }
 
   &.card-transparent {
     box-shadow: none;
@@ -71,15 +76,6 @@ $tile-gradient: linear-gradient(
     .card-img-top {
       box-shadow: $box-shadow;
     }
-  }
-
-  .card-title {
-    font-weight: bold;
-  }
-
-  .card-text {
-    @extend .text-muted;
-    @extend .small;
   }
 
   .card-img-avatar {
@@ -94,26 +90,36 @@ $tile-gradient: linear-gradient(
   }
 }
 
-a.card-title:hover {
-  text-decoration: none;
+.card-img-overlay {
+  background-color: rgba($dark, 0.4);
 }
 
-.tile {
-  .card-title {
-    color: $light;
-  }
+.avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+}
 
-  .card-img {
-    width: auto;
-    max-width: 100%;
-    object-fit: cover;
-  }
+.card-title {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
 
-  .card-img-overlay {
-    display: flex;
-    align-items: flex-end;
-    background: $tile-gradient;
+  > a {
+    color: $dark;
+    transition: all 200ms ease-in-out;
+
+    &:hover {
+      text-decoration: none;
+      color: $primary;
+    }
   }
+}
+.card-text {
+  @extend .text-muted;
+  @extend .small;
+}
+.card-footer {
+  background-color: inherit;
 }
 
 .footer {

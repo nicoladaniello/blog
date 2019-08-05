@@ -1,9 +1,10 @@
 import withPosts from "../withPosts";
 import PostList from ".";
+import { compose, withProps } from "recompose";
 
-const postsQueryVars = {
-  first: 5,
-  after: null
-};
+const postListContainer = compose(
+  withProps(props => props),
+  withPosts
+)(PostList);
 
-export default withPosts(postsQueryVars)(PostList);
+export default postListContainer;

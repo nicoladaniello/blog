@@ -6,15 +6,26 @@ import Layout from "../components/common/Layout";
 import PreFooter from "../components/PreFooter";
 import PostList from "../components/PostList";
 import ListView from "../components/ListView";
+import Link from "next/link";
 
 const Index = ({ page, posts }) => {
   let [view, setView] = useState();
   return (
     <Layout page={page}>
       <section className="mb-5">
-        <ListView selected={view} select={opt => setView((view = opt))} />
-        <h4 className="font-weight-bold">Featured stories</h4>
-        <PostList view={view} data={posts} />
+        <div className="row justify-content-end">
+          <ListView
+            className="col"
+            selected={view}
+            select={opt => setView((view = opt))}
+          />
+          <div className="col text-right">
+            <Link href="/posts">
+              <a className="small text-dark">View all posts</a>
+            </Link>
+          </div>
+        </div>
+        <PostList view={view} posts={posts} />
       </section>
 
       <PreFooter />
@@ -24,5 +35,5 @@ const Index = ({ page, posts }) => {
 
 export default compose(
   withPage("home-page"),
-  withPosts()
+  withPosts
 )(Index);

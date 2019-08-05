@@ -2,9 +2,13 @@ import React from "react";
 import classnames from "classnames";
 import { PostListViewEnum } from "../PostList";
 
-const ListView = ({ selected = PostListViewEnum.COLUMNS, select }) => {
+const ListView = ({
+  selected = PostListViewEnum.COLUMNS,
+  select,
+  className
+}) => {
   return (
-    <div className="d-flex justify-content-end">
+    <div className={className}>
       <div className="btn-group mb-2" role="group">
         <button
           type="button"

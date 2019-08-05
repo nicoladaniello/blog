@@ -7,16 +7,16 @@ import CardImage from "./CardImage";
 import CardTitle from "./CardTitle";
 import CardText from "./CardText";
 import CardHorizontal from "./CardHorizontal";
-import Category from "../../Category";
+import CategoryBadge from "../../Category";
 
 import { featuredImage } from "./CardImage/index.stories";
-import { CategoryPropsData } from "../../Category/index.stories";
+import { CategoryBadgePropsData } from "../../Category/index.stories";
 
 storiesOf("Card", module)
   .add("default", () => (
     <Card style={{ width: "300px" }}>
       <CardBody>
-        <Category {...CategoryPropsData} />
+        <CategoryBadge {...CategoryBadgePropsData} />
         <CardTitle>Default Card</CardTitle>
         <CardText>With some dummy text</CardText>
       </CardBody>
@@ -26,7 +26,7 @@ storiesOf("Card", module)
     <Card style={{ width: "300px" }}>
       <CardImage thumbnail img={featuredImage} />
       <CardBody>
-        <Category {...CategoryPropsData} />
+        <CategoryBadge {...CategoryBadgePropsData} />
         <CardTitle>Default Card with thumbnail</CardTitle>
         <CardText>With some dummy text</CardText>
       </CardBody>
@@ -45,7 +45,7 @@ storiesOf("Card", module)
     <Card transparent style={{ width: "300px" }}>
       <CardImage thumbnail img={featuredImage} />
       <CardBody>
-        <Category {...CategoryPropsData} />
+        <CategoryBadge {...CategoryBadgePropsData} />
         <CardTitle>Default Card with transparency</CardTitle>
         <CardText>With some dummy text</CardText>
       </CardBody>
@@ -57,7 +57,7 @@ storiesOf("Card", module)
         renderLeft={<CardImage thumbnail img={featuredImage} />}
         renderRight={
           <CardBody>
-            <Category {...CategoryPropsData} />
+            <CategoryBadge {...CategoryBadgePropsData} />
             <CardTitle>Default Card with transparency</CardTitle>
             <CardText>With some dummy text</CardText>
           </CardBody>
@@ -71,7 +71,7 @@ storiesOf("Card", module)
         renderLeft={<CardImage thumbnail img={featuredImage} />}
         renderRight={
           <CardBody>
-            <Category {...CategoryPropsData} />
+            <CategoryBadge {...CategoryBadgePropsData} />
             <CardTitle>Default Card with transparency</CardTitle>
             <CardText>With some dummy text</CardText>
           </CardBody>

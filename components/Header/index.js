@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "../Navbar/index.js";
 import classnames from "classnames";
 
-const Header = ({ page: { title, featuredImage } = {} }) => {
+const Header = ({ page: { title, titleRendered, featuredImage } = {} }) => {
   const jumboProps = {
     style: featuredImage
       ? { backgroundImage: `url('${featuredImage.sourceUrl}')` }
@@ -25,7 +25,8 @@ const Header = ({ page: { title, featuredImage } = {} }) => {
         <div className="container h-100">
           <div className="row h-100 align-items-center jusitfy-content-center">
             <div className="col-lg-6 col-md-8 col-sm-12">
-              {title && <h1 className="h2 font-weight-bold">{title}</h1>}
+              {!!title && <h1 className="h2 font-weight-bold">{title}</h1>}
+              {titleRendered}
             </div>
           </div>
         </div>

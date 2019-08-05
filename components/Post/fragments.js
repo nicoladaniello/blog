@@ -6,7 +6,7 @@ const author = gql`
       id
       userId
       name
-      nicename
+      slug
       description
       registeredDate
       avatar {
