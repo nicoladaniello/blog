@@ -31,7 +31,7 @@ const Layout = ({ title, page = {}, children }) => (
       <div className="container">
         <div className="row justify-content-around">
           <div className="col-md-8 col-xs-12">
-            {!!page.page && !!page.page.content && (
+            {!!page && !!page.content && (
               <section>
                 <div dangerouslySetInnerHTML={{ __html: page.content }} />
               </section>

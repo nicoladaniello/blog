@@ -31,7 +31,7 @@ const Teaser = ({
               className="mb-4"
               dangerouslySetInnerHTML={{ __html: excerpt }}
             />
-            <Link href="/posts/[uri]" as={`/posts/${uri}`}>
+            <Link prefetch href="/posts/[uri]" as={`/posts/${uri}`}>
               <button className="btn btn-primary">Read article</button>
             </Link>
           </div>

@@ -19,7 +19,11 @@ const Category = ({ category }) => {
       )}
       <div className="card-img-overlay d-flex align-items-center justify-content-center">
         <div className="text-center">
-          <Link href="/categories/[slug]" as={`/categories/${category.slug}`}>
+          <Link
+            prefetch
+            href="/categories/[slug]"
+            as={`/categories/${category.slug}`}
+          >
             <a className="card-title text-light stretched-link">
               {category.name}
             </a>

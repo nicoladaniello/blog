@@ -20,7 +20,7 @@ const PostListWidget = ({ postsData: { posts }, title, className }) => {
             />
             <div className="media-body">
               <h5 className="mt-0 small">
-                <Link href="/posts/[uri]" as={`/posts/${item.uri}`}>
+                <Link prefetch href="/posts/[uri]" as={`/posts/${item.uri}`}>
                   <a className="stretched-link font-weight-bold list-group-item-action">
                     {item.title}
                   </a>

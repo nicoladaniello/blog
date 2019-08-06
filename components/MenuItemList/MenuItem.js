@@ -1,12 +1,10 @@
-import React, { useState, Fragment } from "react";
+import React, { useState } from "react";
 import classnames from "classnames";
 import Link from "next/link";
 
-const MenuItem = ({
-  menuItem: { id, url, label, childItems, className } = {}
-}) => {
+const MenuItem = ({ menuItem: { url, label, childItems, className } = {} }) => {
   let [toggle, setToggle] = useState(false);
-  const hasChildItems = childItems.length > 0;
+  const hasChildItems = childItems && childItems.nodes.length > 0;
 
   const showMenu = () => setToggle((toggle = true));
   const hideMenu = () => setToggle((toggle = false));
@@ -15,7 +13,7 @@ const MenuItem = ({
     <li
       className={classnames("nav-item", { dropdown: hasChildItems }, className)}
     >
-      <Link href={url}>
+      <Link prefetch href={url}>
         <a
           className={classnames("nav-link", {
             "dropdown-toggle": hasChildItems
@@ -32,8 +30,8 @@ const MenuItem = ({
           onMouseOver={showMenu}
           onMouseLeave={hideMenu}
         >
-          {childItems.map(item => (
-            <Link key={item.id} href={item.url}>
+          {childItems.nodes.map(item => (
+            <Link prefetch key={item.id} href={item.url}>
               <a className="dropdown-item">{item.label}</a>
             </Link>
           ))}

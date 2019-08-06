@@ -19,13 +19,14 @@ const CategoryPage = ({ categoryData: { category }, router }) => {
 
       <Breadcrumbs dark={category && category.featuredImageUrl}>
         <BreadcrumbItem>
-          <Link href="/categories">
+          <Link prefetch href="/categories">
             <a>Categories</a>
           </Link>
         </BreadcrumbItem>
         {category && category.parent && (
           <BreadcrumbItem>
             <Link
+              prefetch
               href="/categories/[slug]"
               as={`/categories/${category.parent.slug}`}
             >

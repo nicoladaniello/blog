@@ -8,7 +8,7 @@ const ListView = ({
   className
 }) => {
   return (
-    <div className={className}>
+    <div className={classnames("d-none d-lg-block", className)}>
       <div className="btn-group mb-2" role="group">
         <button
           type="button"

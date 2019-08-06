@@ -15,7 +15,7 @@ const Posts = ({ pageData: { pageBy }, postsData: { posts } }) => {
   return (
     <Layout page={pageBy}>
       <ListView selected={view} select={opt => setView((view = opt))} />
-      <PostList posts={postsData.posts} />
+      <PostList posts={posts} />
     </Layout>
   );
 };

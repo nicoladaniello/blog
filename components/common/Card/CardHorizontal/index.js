@@ -10,8 +10,8 @@ const CardHorizontal = ({
 }) => {
   return (
     <div className={classnames("row align-items-center", className)} {...rest}>
-      <div className="col-md-6">{renderLeft}</div>
-      <div className={classnames("col-md-6", { "order-1": inverted })}>
+      <div className="col-lg-6">{renderLeft}</div>
+      <div className={classnames("col-lg-6", { "order-1": inverted })}>
         {renderRight}
       </div>
     </div>

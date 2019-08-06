@@ -15,7 +15,7 @@ const Categories = ({
 
   return (
     <Layout page={pageBy}>
-      <CategoryList categories={categoriesData.categories} />
+      <CategoryList categories={categories} />
     </Layout>
   );
 };

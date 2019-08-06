@@ -11,7 +11,7 @@ export const listGroupData = [
 ];
 
 const renderItem = ({ item, className }) => (
-  <Link href="/">
+  <Link prefetch href="/">
     <a className={className}>{item.title}</a>
   </Link>
 );

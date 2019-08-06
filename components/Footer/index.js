@@ -11,26 +11,28 @@ const Footer = ({ note, dark, className, ...rest }) => {
     <footer className="footer">
       <nav
         className={classnames(
-          "navbar",
+          "navbar navbar-expand-sm",
           { "navbar-light": !dark, "navbar-dark": dark },
           className
         )}
         {...rest}
       >
         <div className="container">
-          <Link href="/">
+          <Link prefetch href="/">
             <a className="navbar-brand">
               {settings ? settings.generalSettingsTitle : "Home"}
             </a>
           </Link>
 
-          <div className="navbar-nav mx-auto">
-            <MenuItemListContainer location="FOOTER_MENU" />
-          </div>
+          <div className="collapse navbar-collapse d-flex">
+            <div className="navbar-nav mx-auto">
+              <MenuItemListContainer location="FOOTER_MENU" />
+            </div>
 
-          <p className="navbar-text ml-auto my-auto">
-            <small dangerouslySetInnerHTML={{ __html: note }} />
-          </p>
+            <p className="navbar-text ml-auto my-auto">
+              <small dangerouslySetInnerHTML={{ __html: note }} />
+            </p>
+          </div>
         </div>
       </nav>
     </footer>

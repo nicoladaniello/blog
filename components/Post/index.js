@@ -34,7 +34,7 @@ const Post = ({
     <CardBody>
       {title && (
         <CardTitle>
-          <Link href="/posts/[uri]" as={`/posts/${uri}`}>
+          <Link prefetch href="/posts/[uri]" as={`/posts/${uri}`}>
             <a>{title}</a>
           </Link>
         </CardTitle>
@@ -45,7 +45,11 @@ const Post = ({
             <CardText>
               <small>
                 by{" "}
-                <Link href="/users/[slug]" as={`/users/${author.slug}`}>
+                <Link
+                  prefetch
+                  href="/users/[slug]"
+                  as={`/users/${author.slug}`}
+                >
                   <a className="font-weight-bold">{author.name}</a>
                 </Link>
               </small>

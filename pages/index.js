@@ -24,7 +24,7 @@ const Index = ({ pageData: { pageBy }, postsData: { posts } }) => {
             select={opt => setView((view = opt))}
           />
           <div className="col text-right">
-            <Link href="/posts">
+            <Link prefetch href="/posts">
               <a className="small text-dark">View all posts</a>
             </Link>
           </div>

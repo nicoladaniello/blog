@@ -25,6 +25,7 @@ $navbar-nav-link-padding-x: 0.9rem;
 $box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.3);
 
 @import "~bootstrap/scss/bootstrap.scss";
+@import "~bootstrap/scss/mixins/_breakpoints.scss";
 @import "~nprogress/nprogress.css";
 
 main {
@@ -58,13 +59,13 @@ $tile-gradient: linear-gradient(
 );
 
 .jumbotron-header {
+  position: relative;
   padding-top: 8rem;
+  height: 400px;
 }
 
 .jumbotron-image {
-  height: 30vw;
-  min-height: 30vw;
-  padding: 0px 0px;
+  padding: 0px 0px 0px 0px;
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -77,6 +78,11 @@ $tile-gradient: linear-gradient(
 }
 
 .jumbotron-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   padding-top: 8rem;
   padding-bottom: 4rem;
   background-color: rgba($dark, 0.6);
@@ -166,6 +172,35 @@ $tile-gradient: linear-gradient(
     background-color: rgba($light, 0.5);
     border-radius: $border-radius;
   }
+}
+
+@include media-breakpoint-down(md) {
+  .navbar-collapse.show {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 300px;
+    max-width: 80vw;
+    padding: 4rem 4rem;
+    z-index: $zindex-modal;
+    box-shadow: $modal-content-box-shadow-sm-up;
+  }
+  .navbar-dark .navbar-collapse.show {
+    background-color: $dark;
+    .close {
+      color: $white;
+    }
+  }
+  .navbar-light .navbar-collapse.show {
+    background-color: $light;
+  }
+}
+
+.navbar-toggler.collapse {
+  position: fixed;
+  top: 10px;
+  left: 10px;
 }
 
 .card-columns.two-columns {
