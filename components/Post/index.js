@@ -11,7 +11,7 @@ import { stripHtml } from "../../util";
 import Tag from "../Tag";
 
 const Post = ({
-  data: { title, uri, featuredImage, excerpt, author, date, tags, category },
+  post: { title, uri, featuredImage, excerpt, author, date, tags, categories },
   horizontal,
   className,
   ...rest
@@ -19,11 +19,11 @@ const Post = ({
   const image = featuredImage ? (
     <div className="position-relative">
       <CardImage thumbnail img={featuredImage} />
-      {category && (
+      {categories && !!categories.nodes.length && (
         <CategoryBadge
           className="position-absolute"
           style={{ top: 24, left: 0 }}
-          data={category}
+          data={categories.nodes[0]}
         />
       )}
     </div>
@@ -74,9 +74,9 @@ const Post = ({
   return (
     <Card className={className} {...rest}>
       {content}
-      {!!tags && (
+      {tags && (
         <div className="card-footer">
-          {tags.map(tag => (
+          {tags.nodes.map(tag => (
             <Tag key={tag.id} tag={tag} />
           ))}
         </div>

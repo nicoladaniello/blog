@@ -1,8 +1,5 @@
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
-import { compose } from "recompose";
-import renderWhenLoading from "./renderWhenLoading";
-import renderWhenError from "./renderWhenError";
 
 export const getPage = gql`
   query getPage($uri: String!) {
@@ -18,13 +15,8 @@ export const getPage = gql`
   }
 `;
 
-const withPage = uri =>
-  compose(
-    graphql(getPage, {
-      options: { variables: { uri } },
-      props: ({ data: { pageBy } = {} }) => ({ page: pageBy })
-    }),
-    renderWhenLoading(),
-    renderWhenError()
-  );
+const withPage = graphql(getPage, {
+  options: ({ variables }) => ({ variables }),
+  props: ({ data }) => ({ pageData: data })
+});
 export default withPage;

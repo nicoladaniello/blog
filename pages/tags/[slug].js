@@ -1,19 +1,16 @@
 import React from "react";
-import Layout from "../../components/common/Layout";
-import PostList from "../../components/PostList";
 import { compose, withProps } from "recompose";
 import { withRouter } from "next/router";
+import Layout from "../../components/common/Layout";
+import PostList from "../../components/PostList";
 import withTag from "../../containers/withTag";
-import ErrorMessage from "../../components/ErrorMessage";
 
-const Tag = ({ tag, router }) => {
+const Tag = ({ tagData: { tag }, router }) => {
+  if (!tag) return <NotFound page={{ title: "Not Found" }} />;
+
   return (
     <Layout page={{ title: `tag: ${router.query.slug}` }}>
-      {tag ? (
-        <PostList posts={tag.posts} />
-      ) : (
-        <ErrorMessage message="Tag not found" />
-      )}
+      {tagData && tagData.tag && <PostList posts={tagData.tag.posts} />}
     </Layout>
   );
 };

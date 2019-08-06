@@ -90,27 +90,14 @@ function loadMorePosts({ posts: { pageInfo }, fetchMore }, vars) {
 }
 
 const withPosts = graphql(getPosts, {
-  options: ({ variables }) => {
-    return { variables };
-  },
-  props: ({ data = {} }) => {
-    if (!data.posts || !data.posts.nodes.length) return { posts: null };
-
-    const pageInfo = data.posts.pageInfo;
-    const posts = data.posts.nodes;
-    return {
-      posts: {
-        pageInfo,
-        posts: posts.map(post => ({
-          ...post,
-          tags: post.tags.nodes,
-          category: post.categories.nodes[0]
-        })),
-        onLoadMore: () => {
-          loadMorePosts(data, variables);
-        }
+  options: ({ variables }) => ({ variables }),
+  props: ({ data }) => ({
+    postsData: {
+      ...data,
+      onLoadMore: () => {
+        loadMorePosts(data, variables);
       }
-    };
-  }
+    }
+  })
 });
 export default withPosts;

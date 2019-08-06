@@ -1,12 +1,10 @@
 import React, { useContext } from "react";
 import Link from "next/link";
 import classnames from "classnames";
-
-import NavbarMenu from "../NavbarMenu/index";
 import SettingsContext from "../../providers/SettingsContext";
-import withMenuItems from "../../containers/withMenuItems";
+import MenuItemListContainer from "../MenuItemList/container";
 
-const Navbar = ({ menuItems, dark, className, ...rest }) => {
+const Navbar = ({ dark, className, ...rest }) => {
   const settings = useContext(SettingsContext);
 
   return (
@@ -30,13 +28,13 @@ const Navbar = ({ menuItems, dark, className, ...rest }) => {
         </button>
 
         <div className="collapse navbar-collapse">
-          {menuItems && (
-            <NavbarMenu menuItems={menuItems} className="ml-auto" />
-          )}
+          <div className="navbar-nav ml-auto">
+            <MenuItemListContainer location="NAVBAR_MENU" />
+          </div>
         </div>
       </div>
     </nav>
   );
 };
 
-export default withMenuItems("NAVBAR_MENU")(Navbar);
+export default Navbar;

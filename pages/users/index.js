@@ -11,9 +11,12 @@ import CardBody from "../../components/common/Card/CardBody";
 import CardTitle from "../../components/common/Card/CardTitle";
 import CardText from "../../components/common/Card/CardText";
 
-const Index = ({ page, users }) => {
+const Index = ({ pageData: { pageBy }, usersData: { users } }) => {
+  if (!pageBy) pageBy = { title: "Users" };
+  if (!users) return <NotFound page={pageBy} />;
+
   return (
-    <Layout page={page}>
+    <Layout page={pageBy}>
       <section className="mb-5">
         <h4 className="font-weight-bold">Our authors</h4>
         {!!users &&

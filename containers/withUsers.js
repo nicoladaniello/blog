@@ -35,14 +35,8 @@ export const getUsers = gql`
   }
 `;
 
-const withUsers = variables =>
-  graphql(getUsers, {
-    options: { variables },
-    props: ({ data = {} }) => {
-      return {
-        pageInfo: data.users ? data.users.pageInfo : null,
-        users: data.users ? data.users.nodes : null
-      };
-    }
-  });
+const withUsers = graphql(getUsers, {
+  options: ({ variables }) => ({ variables }),
+  props: ({ data }) => ({ usersData: data })
+});
 export default withUsers;

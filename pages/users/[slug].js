@@ -6,14 +6,10 @@ import withUser from "../../containers/withUser";
 import ErrorMessage from "../../components/ErrorMessage";
 import Image from "../../components/Image";
 import PostList from "../../components/PostList";
+import NotFound from "../../components/NotFound";
 
-const User = ({ user }) => {
-  if (!user)
-    return (
-      <Layout>
-        <ErrorMessage message="User not found" />
-      </Layout>
-    );
+const User = ({ userData: { user } }) => {
+  if (!user) return <NotFound />;
 
   const page = user.avatar
     ? {

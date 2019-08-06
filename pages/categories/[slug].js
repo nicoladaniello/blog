@@ -1,55 +1,45 @@
 import React, { Fragment } from "react";
-import Layout from "../../components/common/Layout";
-import PostList from "../../components/PostList";
 import { compose, withProps } from "recompose";
 import { withRouter } from "next/router";
-import ErrorMessage from "../../components/ErrorMessage";
-import withCategory from "../../containers/withCategory";
 import Link from "next/link";
+import withCategory from "../../containers/withCategory";
+import Layout from "../../components/common/Layout";
+import PostList from "../../components/PostList";
 import CategoryList from "../../components/CategoryList/index";
+import NotFound from "../../components/NotFound";
+import Breadcrumbs from "../../components/Breadcrumbs";
+import BreadcrumbItem from "../../components/Breadcrumbs/item";
 
-const CategoryPage = ({ category }) => {
-  if (!category)
-    return (
-      <Layout page={{ title: "Not found" }}>
-        <ErrorMessage message="Category not found" />
-      </Layout>
-    );
+const CategoryPage = ({ categoryData: { category }, router }) => {
+  const title = (
+    <Fragment>
+      <h1 className="h2 font-weight-bold">
+        {category ? category.name : `Not found`}
+      </h1>
 
-  const breadcrumbs = (
-    <nav aria-label="breadcrumb">
-      <ol className="breadcrumb bg-transparent text-light">
-        <li className="breadcrumb-item">
+      <Breadcrumbs dark={category && category.featuredImageUrl}>
+        <BreadcrumbItem>
           <Link href="/categories">
-            <a className="text-light">Categories</a>
+            <a>Categories</a>
           </Link>
-        </li>
-        {category.parent && (
-          <li className="breadcrumb-item">
+        </BreadcrumbItem>
+        {category && category.parent && (
+          <BreadcrumbItem>
             <Link
               href="/categories/[slug]"
               as={`/categories/${category.parent.slug}`}
             >
-              <a className="text-light">{category.parent.name}</a>
+              <a>{category.parent.name}</a>
             </Link>
-          </li>
+          </BreadcrumbItem>
         )}
-        <li
-          className="breadcrumb-item active text-warning font-weight-bold"
-          aria-current="page"
-        >
-          {category.name}
-        </li>
-      </ol>
-    </nav>
-  );
-
-  const title = (
-    <Fragment>
-      <h1 className="h2 font-weight-bold">{category.name}</h1>
-      {breadcrumbs}
+        <BreadcrumbItem>
+          {category ? category.name : router.query.slug}
+        </BreadcrumbItem>
+      </Breadcrumbs>
     </Fragment>
   );
+  if (!category) return <NotFound page={{ titleRendered: title }} />;
 
   const page = {
     titleRendered: title,
@@ -58,7 +48,7 @@ const CategoryPage = ({ category }) => {
 
   return (
     <Layout page={page}>
-      {!!category.children.length && (
+      {category.children && !!category.children.nodes.length && (
         <Fragment>
           <h2 className="font-weight-bold">Sub topics</h2>
           <CategoryList categories={category.children} />

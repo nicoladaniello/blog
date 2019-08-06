@@ -1,11 +1,10 @@
 import React, { useContext } from "react";
 import Link from "next/link";
 import classnames from "classnames";
-import NavbarMenu from "../NavbarMenu";
-import withMenuItems from "../../containers/withMenuItems";
 import SettingsContext from "../../providers/SettingsContext";
+import MenuItemListContainer from "../MenuItemList/container";
 
-const Footer = ({ menuItems, note, dark, className, ...rest }) => {
+const Footer = ({ note, dark, className, ...rest }) => {
   const settings = useContext(SettingsContext);
 
   return (
@@ -25,9 +24,9 @@ const Footer = ({ menuItems, note, dark, className, ...rest }) => {
             </a>
           </Link>
 
-          {menuItems && (
-            <NavbarMenu menuItems={menuItems} className="mx-auto" />
-          )}
+          <div className="navbar-nav mx-auto">
+            <MenuItemListContainer location="FOOTER_MENU" />
+          </div>
 
           <p className="navbar-text ml-auto my-auto">
             <small dangerouslySetInnerHTML={{ __html: note }} />
@@ -38,4 +37,4 @@ const Footer = ({ menuItems, note, dark, className, ...rest }) => {
   );
 };
 
-export default withMenuItems("FOOTER_MENU")(Footer);
+export default Footer;

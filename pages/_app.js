@@ -1,10 +1,26 @@
 import React from "react";
 import App, { Container } from "next/app";
+import Router from "next/router";
 import withApolloClient from "../lib/with-apollo-client";
 import { ApolloProvider } from "react-apollo";
+import nprogress from "nprogress";
 
 import "../styles.scss";
 import SettingsProvider from "../providers/SettingsProvider";
+
+Router.events.on("routeChangeStart", url => {
+  console.log(`Loading ${url}`);
+  nprogress.start();
+});
+
+Router.events.on("routeChangeComplete", url => {
+  console.log("Loading complete successfully");
+  nprogress.done();
+});
+Router.events.on("routeChangeError", url => {
+  console.log("Loading complete with error");
+  nprogress.done();
+});
 
 class MyApp extends App {
   render() {

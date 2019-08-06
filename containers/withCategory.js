@@ -1,6 +1,7 @@
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
 import { postFields } from "./withPosts";
+import categories from "../pages/categories";
 
 export const getCategory = gql`
   query getCategory($slug: [String]) {
@@ -46,29 +47,14 @@ export const getCategory = gql`
 
 const withCategory = graphql(getCategory, {
   options: ({ variables }) => ({ variables }),
-  props: ({ data }) => {
-    if (!data || !data.categories || !data.categories.nodes.length)
-      return { category: null };
-
-    let category = data.categories.nodes[0];
-    category.children = category.children.nodes ? category.children.nodes : [];
-    const pageInfo = category.posts ? category.posts.pageInfo : null;
-    const posts = category.posts
-      ? category.posts.nodes
-        ? category.posts.nodes
-        : category.posts.posts
-      : null;
-
-    category.posts = {
-      pageInfo,
-      posts: posts.map(post => ({
-        ...post,
-        tags: post.tags.nodes,
-        category: post.categories.nodes.length ? post.categories.nodes[0] : null
-      }))
-    };
-
-    return { category };
-  }
+  props: ({ data }) => ({
+    categoryData: {
+      ...data,
+      category:
+        data.categories && data.categories.nodes.length
+          ? data.categories.nodes[0]
+          : null
+    }
+  })
 });
 export default withCategory;

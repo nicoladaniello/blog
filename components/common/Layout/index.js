@@ -10,8 +10,8 @@ const Layout = ({ title, page = {}, children }) => (
     <Head>
       {title ? (
         <title>{title}</title>
-      ) : page.title ? (
-        <title>{stripHtml(page.title)}</title>
+      ) : page.page && page.page.title ? (
+        <title>{stripHtml(page.page.title)}</title>
       ) : null}
       <style>
         {`
@@ -31,7 +31,7 @@ const Layout = ({ title, page = {}, children }) => (
       <div className="container">
         <div className="row justify-content-around">
           <div className="col-md-8 col-xs-12">
-            {!!page.content && (
+            {!!page.page && !!page.page.content && (
               <section>
                 <div dangerouslySetInnerHTML={{ __html: page.content }} />
               </section>

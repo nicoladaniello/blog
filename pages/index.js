@@ -1,17 +1,21 @@
 import React, { useState } from "react";
-import { compose } from "recompose";
+import Link from "next/link";
+import { compose, withProps } from "recompose";
 import withPage from "../containers/withPage";
 import withPosts from "../containers/withPosts";
 import Layout from "../components/common/Layout";
 import PreFooter from "../components/PreFooter";
 import PostList from "../components/PostList";
 import ListView from "../components/ListView";
-import Link from "next/link";
+import NotFound from "../components/NotFound";
 
-const Index = ({ page, posts }) => {
+const Index = ({ pageData: { pageBy }, postsData: { posts } }) => {
+  if (!pageBy) pageBy = { title: "Welcome" };
+  if (!posts) return <NotFound page={pageBy} />;
+
   let [view, setView] = useState();
   return (
-    <Layout page={page}>
+    <Layout page={pageBy}>
       <section className="mb-5">
         <div className="row justify-content-end">
           <ListView
@@ -34,6 +38,7 @@ const Index = ({ page, posts }) => {
 };
 
 export default compose(
-  withPage("home-page"),
+  withProps(() => ({ variables: { uri: "home-page" } })),
+  withPage,
   withPosts
 )(Index);

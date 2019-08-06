@@ -1,8 +1,5 @@
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
-import { compose } from "recompose";
-import renderWhenLoading from "./renderWhenLoading";
-import renderWhenError from "./renderWhenError";
 
 export const getSettings = gql`
   query getSettings {
@@ -25,11 +22,5 @@ export const getSettings = gql`
   }
 `;
 
-const withSettings = compose(
-  graphql(getSettings, {
-    props: ({ data: { allSettings } = {} }) => ({ settings: allSettings })
-  }),
-  renderWhenLoading(),
-  renderWhenError()
-);
+const withSettings = graphql(getSettings);
 export default withSettings;

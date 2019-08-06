@@ -1,10 +1,9 @@
-import React from "react";
 import { branch, renderComponent } from "recompose";
 
-const renderWhenLoading = () =>
+const renderWhileLoading = (component, propName = "data") =>
   branch(
-    props => props.data && props.data.loading,
-    renderComponent(() => <div className="spinner-border text-primary" />)
+    props => props[propName] && props[propName].loading,
+    renderComponent(component)
   );
 
-export default renderWhenLoading;
+export default renderWhileLoading;

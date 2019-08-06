@@ -8,10 +8,12 @@ export const PostListViewEnum = Object.freeze({
 });
 
 const PostList = ({ posts, view = PostListViewEnum.COLUMNS, ...rest }) => {
-  if (!posts || !posts.posts.length)
+  if (!posts || !posts.nodes.length)
     return (
       <div {...rest}>
-        <div className="alert alert-info">Nothing to show yet!</div>
+        <div className="alert alert-info small">
+          There are no posts at the moment
+        </div>
       </div>
     );
 
@@ -22,17 +24,17 @@ const PostList = ({ posts, view = PostListViewEnum.COLUMNS, ...rest }) => {
           "card-columns two-columns": view === PostListViewEnum.COLUMNS
         })}
       >
-        {posts.posts.map(post => (
+        {posts.nodes.map(post => (
           <Post
             key={post.id}
+            post={post}
             horizontal={view === PostListViewEnum.ROWS}
-            data={post}
           />
         ))}
       </div>
 
       <div className="text-center">
-        {posts.posts.pageInfo && posts.posts.pageInfo.hasNextPage && (
+        {posts.pageInfo && posts.pageInfo.hasNextPage && (
           <button className="btn btn-light" onClick={posts.onLoadMore}>
             Load more
           </button>

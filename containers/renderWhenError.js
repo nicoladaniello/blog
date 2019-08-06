@@ -1,11 +1,9 @@
-import React from "react";
 import { branch, renderComponent } from "recompose";
-import ErrorMessage from "../components/ErrorMessage";
 
-const renderWhenError = () =>
+const renderWhenError = (component, propName = "data") =>
   branch(
-    props => props.data && props.data.error,
-    renderComponent(() => <ErrorMessage message="Error loading posts." />)
+    props => props[propName] && props[propName].error,
+    renderComponent(component)
   );
 
 export default renderWhenError;

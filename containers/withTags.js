@@ -21,18 +21,6 @@ export const getTags = gql`
 
 const withTags = graphql(getTags, {
   options: ({ variables }) => ({ variables }),
-  props: ({ data = {} }) => {
-    if (!data.tags || !data.tags.nodes.length) return { tags: null };
-
-    const tags = data.tags.nodes;
-    const pageInfo = data.tags.pageInfo;
-
-    return {
-      tags: {
-        pageInfo,
-        tags
-      }
-    };
-  }
+  props: ({ data }) => ({ tagsData: data })
 });
 export default withTags;

@@ -31,27 +31,12 @@ export const getUser = gql`
 `;
 
 const withUser = graphql(getUser, {
-  options: ({ router }) => ({ variables: { slug: router.query.slug } }),
-  props: ({ data = {} }) => {
-    if (!data.users || !data.users.nodes.length) return { user: null };
-    const user = data.users.nodes[0];
-    const pageInfo = user.posts ? user.posts.pageInfo : null;
-    const posts = user.posts ? user.posts.nodes : null;
-
-    return {
-      user: {
-        ...user,
-        posts: {
-          pageInfo,
-          posts: posts.map(post => ({
-            ...post,
-            tags: post.tags.nodes.length ? post.tags.nodes : null,
-            category:
-              post.categories.nodes.length > 0 ? post.categories.nodes[0] : null
-          }))
-        }
-      }
-    };
-  }
+  options: ({ variables }) => ({ variables }),
+  props: ({ data }) => ({
+    userData: {
+      ...data,
+      user: data.users && data.users.nodes.length ? data.users.nodes[0] : null
+    }
+  })
 });
 export default withUser;

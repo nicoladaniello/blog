@@ -1,8 +1,5 @@
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
-import { compose } from "recompose";
-import renderWhenLoading from "./renderWhenLoading";
-import renderWhenError from "./renderWhenError";
 
 const getPost = gql`
   query getPost($uri: String!) {
@@ -46,12 +43,8 @@ const getPost = gql`
   }
 `;
 
-const withPost = compose(
-  graphql(getPost, {
-    options: ({ router }) => ({ variables: { uri: router.query.uri } }),
-    props: ({ data: { postBy } = {} }) => ({ post: postBy })
-  }),
-  renderWhenLoading(),
-  renderWhenError()
-);
+const withPost = graphql(getPost, {
+  options: ({ variables }) => ({ variables }),
+  props: ({ data }) => ({ postData: data })
+});
 export default withPost;

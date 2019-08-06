@@ -1,15 +1,15 @@
 import React from "react";
 import Category from "../Category";
 
-const CategoryList = ({ categories }) => {
-  if (!categories || !categories.length)
+const CategoryList = ({ categories, ...rest }) => {
+  if (!categories || !categories.nodes.length)
     return (
-      <div {...rest}>
-        <div className="alert alert-info">Nothing to show yet!</div>
+      <div className="alert alert-info small">
+        There are no categories at the moment
       </div>
     );
 
-  return categories.map(cat => <Category key={cat.id} category={cat} />);
+  return categories.nodes.map(cat => <Category key={cat.id} category={cat} />);
 };
 
 export default CategoryList;

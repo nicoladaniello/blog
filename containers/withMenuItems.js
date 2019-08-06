@@ -1,8 +1,5 @@
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
-import { compose } from "recompose";
-import renderWhenLoading from "./renderWhenLoading";
-import renderWhenError from "./renderWhenError";
 
 export const getMenuItems = gql`
   query getMenuItems($location: MenuLocationEnum) {
@@ -25,23 +22,7 @@ export const getMenuItems = gql`
   }
 `;
 
-const withMenuItems = location =>
-  compose(
-    graphql(getMenuItems, {
-      options: { variables: { location } },
-      props: ({ data }) => {
-        if (!data.menuItems) return null;
-        return {
-          menuItems: [
-            ...data.menuItems.nodes.map(item => {
-              if (item.childItems)
-                return { ...item, childItems: item.childItems.nodes };
-            })
-          ]
-        };
-      }
-    }),
-    renderWhenLoading(),
-    renderWhenError()
-  );
+const withMenuItems = graphql(getMenuItems, {
+  options: ({ variables }) => ({ variables })
+});
 export default withMenuItems;

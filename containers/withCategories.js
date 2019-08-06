@@ -23,19 +23,6 @@ export const getCategories = gql`
 
 const withCategories = graphql(getCategories, {
   options: ({ variables }) => ({ variables }),
-  props: ({ data }) => {
-    if (!data || !data.categories || !data.categories.nodes.length)
-      return { categories: null };
-
-    const categories = data.categories.nodes;
-    const pageInfo = data.categories.pageInfo;
-
-    return {
-      categories: {
-        pageInfo,
-        categories
-      }
-    };
-  }
+  props: ({ data }) => ({ categoriesData: data })
 });
 export default withCategories;
