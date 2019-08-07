@@ -4,18 +4,21 @@ import Image from "../../../Image";
 
 const CardImage = ({ img, thumbnail, avatar, className, ...rest }) => {
   return (
-    <Image
-      {...rest}
-      img={img}
-      className={classnames(
-        {
-          "card-img-top": thumbnail,
-          "card-img-avatar": avatar,
-          "card-img": !thumbnail && !avatar
-        },
-        className
-      )}
-    />
+    img &&
+    img.sourceUrl && (
+      <Image
+        {...rest}
+        img={img}
+        className={classnames(
+          {
+            "card-img-top": thumbnail,
+            "card-img-avatar": avatar,
+            "card-img": !thumbnail && !avatar
+          },
+          className
+        )}
+      />
+    )
   );
 };
 

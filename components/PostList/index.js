@@ -1,13 +1,7 @@
 import React from "react";
 import Post from "../Post";
-import classnames from "classnames";
 
-export const PostListViewEnum = Object.freeze({
-  COLUMNS: 0,
-  ROWS: 1
-});
-
-const PostList = ({ posts, view = PostListViewEnum.COLUMNS, ...rest }) => {
+const PostList = ({ posts, ...rest }) => {
   if (!posts || !posts.nodes.length)
     return (
       <div {...rest}>
@@ -19,17 +13,9 @@ const PostList = ({ posts, view = PostListViewEnum.COLUMNS, ...rest }) => {
 
   return (
     <div {...rest}>
-      <div
-        className={classnames({
-          "card-columns two-columns": view === PostListViewEnum.COLUMNS
-        })}
-      >
+      <div className="card-columns two-columns">
         {posts.nodes.map(post => (
-          <Post
-            key={post.id}
-            post={post}
-            horizontal={view === PostListViewEnum.ROWS}
-          />
+          <Post key={post.id} post={post} />
         ))}
       </div>
 

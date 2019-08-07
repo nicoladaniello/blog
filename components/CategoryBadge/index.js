@@ -2,13 +2,15 @@ import React from "react";
 import classnames from "classnames";
 import Link from "next/link";
 
-const CategoryBadge = ({ data: { name, slug }, className, ...rest }) => {
+const CategoryBadge = ({ data, className, ...rest }) => {
   return (
-    <Link prefetch href="/categories/[slug]" as={`/categories/${slug}`}>
-      <a className={classnames("badge badge-warning", className)} {...rest}>
-        {name}
-      </a>
-    </Link>
+    data && (
+      <Link prefetch href="/categories/[slug]" as={`/categories/${data.slug}`}>
+        <a className={classnames("badge badge-warning", className)} {...rest}>
+          {data.name}
+        </a>
+      </Link>
+    )
   );
 };
 
