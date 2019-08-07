@@ -1,5 +1,6 @@
 import React from "react";
-import { compose } from "recompose";
+import Link from "next/link";
+import { compose, withProps } from "recompose";
 import withPage from "../../containers/withPage";
 import Layout from "../../components/common/Layout";
 import PreFooter from "../../components/PreFooter";
@@ -10,6 +11,7 @@ import CardImage from "../../components/common/Card/CardImage";
 import CardBody from "../../components/common/Card/CardBody";
 import CardTitle from "../../components/common/Card/CardTitle";
 import CardText from "../../components/common/Card/CardText";
+import NotFound from "../../components/NotFound";
 
 const Index = ({ pageData: { pageBy }, usersData: { users } }) => {
   if (!pageBy) pageBy = { title: "Users" };
@@ -20,13 +22,17 @@ const Index = ({ pageData: { pageBy }, usersData: { users } }) => {
       <section className="mb-5">
         <h4 className="font-weight-bold">Our authors</h4>
         {!!users &&
-          users.map(user => (
+          users.nodes.map(user => (
             <Card key={user.id}>
               {!!user.avatar && (
                 <CardImage avatar img={{ sourceUrl: user.avatar.url }} />
               )}
               <CardBody>
-                <CardTitle>{user.name}</CardTitle>
+                <CardTitle>
+                  <Link href="/users/[slug]" as={`/users/${user.slug}`}>
+                    <a>{user.name}</a>
+                  </Link>
+                </CardTitle>
                 {!!user.description && <CardText>{user.description}</CardText>}
               </CardBody>
             </Card>
@@ -39,6 +45,7 @@ const Index = ({ pageData: { pageBy }, usersData: { users } }) => {
 };
 
 export default compose(
-  withPage("users"),
-  withUsers()
+  withProps(() => ({ variables: { uri: "users" } })),
+  withPage,
+  withUsers
 )(Index);

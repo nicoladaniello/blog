@@ -1,5 +1,5 @@
 import React from "react";
-import { compose, withProps } from "recompose";
+import { compose, withProps, branch } from "recompose";
 import { withRouter } from "next/router";
 import Layout from "../../components/common/Layout";
 import withPost from "../../containers/withPost";
@@ -12,6 +12,6 @@ const Post = ({ postData: { postBy } }) => {
 
 export default compose(
   withRouter,
-  withProps(({ router }) => ({ variables: { uri: router.query.uri } })),
-  withPost
+  withProps(({ router }) => ({ variables: { uri: router.query.uri || "" } })),
+  branch(({ router }) => router.query.uri, withPost)
 )(Post);

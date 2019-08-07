@@ -5,8 +5,8 @@ import withApolloClient from "../lib/with-apollo-client";
 import { ApolloProvider } from "react-apollo";
 import nprogress from "nprogress";
 
-import "../styles.scss";
 import SettingsProvider from "../providers/SettingsProvider";
+import "../styles.scss";
 
 Router.events.on("routeChangeStart", url => {
   console.log(`Loading ${url}`);

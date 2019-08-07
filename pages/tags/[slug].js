@@ -4,13 +4,14 @@ import { withRouter } from "next/router";
 import Layout from "../../components/common/Layout";
 import PostList from "../../components/PostList";
 import withTag from "../../containers/withTag";
+import NotFound from "../../components/NotFound";
 
 const Tag = ({ tagData: { tag }, router }) => {
-  if (!tag) return <NotFound page={{ title: "Not Found" }} />;
+  if (!tag) return <NotFound />;
 
   return (
     <Layout page={{ title: `tag: ${router.query.slug}` }}>
-      {tagData && tagData.tag && <PostList posts={tagData.tag.posts} />}
+      {tag && <PostList posts={tag.posts} />}
     </Layout>
   );
 };
