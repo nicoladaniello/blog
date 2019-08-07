@@ -29,6 +29,9 @@ const getPost = gql`
       featuredImage {
         id
         sourceUrl
+        srcSet
+        sizes
+        altText
       }
       author {
         id

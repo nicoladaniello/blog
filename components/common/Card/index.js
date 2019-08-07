@@ -6,7 +6,7 @@ const Card = ({ transparent, shadow = true, className, children, ...rest }) => {
     <div
       {...rest}
       className={classnames(
-        "card mb-4",
+        "card",
         { "card-transparent": transparent, "card-shadow": shadow },
         className
       )}

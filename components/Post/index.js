@@ -1,12 +1,10 @@
 import React from "react";
+import Link from "next/link";
 import Card from "../common/Card";
 import CardBody from "../common/Card/CardBody";
 import CardTitle from "../common/Card/CardTitle";
 import CardImage from "../common/Card/CardImage";
-import CardText from "../common/Card/CardText";
 import CategoryBadge from "../CategoryBadge";
-import Link from "next/link";
-import { stripHtml } from "../../util";
 import CardMeta from "../common/Card/CardMeta";
 import TagList from "../TagList";
 

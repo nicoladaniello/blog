@@ -12,6 +12,13 @@ export const getCategory = gql`
         slug
         description
         featuredImageUrl
+        featuredImage {
+          id
+          sourceUrl
+          srcSet
+          sizes
+          altText
+        }
         posts {
           pageInfo {
             hasPreviousPage

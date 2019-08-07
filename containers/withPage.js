@@ -9,7 +9,11 @@ export const getPage = gql`
       title
       content
       featuredImage {
+        id
         sourceUrl
+        srcSet
+        sizes
+        altText
       }
     }
   }

@@ -220,3 +220,32 @@ $tile-gradient: linear-gradient(
     column-count: 1;
   }
 }
+
+.category-list {
+  display: flex;
+  flex-wrap: wrap;
+  overflow-x: scroll;
+  padding: 1rem;
+}
+
+.category {
+  display: inline-block;
+  width: 200px;
+  min-width: 200px;
+  height: 200px;
+  color: $white;
+  background-color: $dark;
+  margin: 1rem 1rem 2rem 1rem;
+  border: none;
+
+  .category-overlay {
+    @extend .card-img-overlay;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card-title {
+    color: $light;
+  }
+}

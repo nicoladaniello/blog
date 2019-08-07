@@ -16,6 +16,13 @@ export const getCategories = gql`
         slug
         description
         featuredImageUrl
+        featuredImage {
+          id
+          sourceUrl
+          srcSet
+          sizes
+          altText
+        }
       }
     }
   }
