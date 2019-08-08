@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "../Navbar/index.js";
 import classnames from "classnames";
+import Image from "../Image.js";
 
 const Header = ({ page: { title, titleRendered, featuredImage } = {} }) => {
   const jumboProps = {
@@ -19,7 +20,12 @@ const Header = ({ page: { title, titleRendered, featuredImage } = {} }) => {
   };
 
   return (
-    <div {...jumboProps}>
+    <div className="header">
+      <Image
+        className="hero"
+        img={{ ...featuredImage, sizes: "100vw" }}
+        role="presentation"
+      />
       <div {...overlayProps}>
         <Navbar dark={featuredImage} className="navbar-header" />
         <div className="container h-100">

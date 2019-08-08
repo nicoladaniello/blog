@@ -5,7 +5,7 @@ import Image from "../../../Image";
 const CardImage = ({ img, thumbnail, avatar, className, ...rest }) => {
   return img && img.sourceUrl ? (
     <Image
-      {...rest}
+      thumbnail={thumbnail}
       img={img}
       className={classnames(
         {
@@ -15,6 +15,7 @@ const CardImage = ({ img, thumbnail, avatar, className, ...rest }) => {
         },
         className
       )}
+      {...rest}
     />
   ) : (
     ""
