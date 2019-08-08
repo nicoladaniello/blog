@@ -36,7 +36,9 @@
   },
   "devDependencies": {
     "@storybook/react": "^5.1.9",
+    "@zeit/next-css": "^1.0.1",
     "eslint": "^6.1.0",
-    "eslint-plugin-react": "^7.14.3"
+    "eslint-plugin-react": "^7.14.3",
+    "next-purgecss": "^3.1.1"
   }
 }
