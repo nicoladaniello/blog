@@ -10,8 +10,8 @@ const Layout = ({ title, page = {}, children }) => (
     <Head>
       {title ? (
         <title>{title}</title>
-      ) : page.page && page.page.title ? (
-        <title>{stripHtml(page.page.title)}</title>
+      ) : page.title ? (
+        <title>{stripHtml(page.title)}</title>
       ) : null}
       <style>
         {`
