@@ -5,7 +5,7 @@ import SettingsContext from "../../../providers/SettingsContext.js";
 import { stripHtml } from "../../../util.js";
 import Header from "../../Header/index.js";
 
-const Layout = ({ title, description, page = {}, children }) => {
+const Layout = ({ title, page = {}, children }) => {
   const { generalSettingsDescription } = useContext(SettingsContext);
   const LayoutSidebar = dynamic(import("../../LayoutSidebar/index.js"));
   const Footer = dynamic(import("../../Footer/index.js"));

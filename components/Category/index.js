@@ -9,7 +9,7 @@ const Category = ({
 }) => {
   return (
     <Card className="category">
-      <CardImage img={featuredImage} />
+      <CardImage tile img={featuredImage} />
       <div className="category-overlay">
         <div className="text-center">
           <Link prefetch href="/categories/[slug]" as={`/categories/${slug}`}>

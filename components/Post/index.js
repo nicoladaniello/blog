@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import classnames from "classnames";
 import Card from "../common/Card";
 import CardBody from "../common/Card/CardBody";
 import CardTitle from "../common/Card/CardTitle";
@@ -13,10 +14,8 @@ const Post = ({ post, className, ...rest }) => {
   const category =
     categories && categories.nodes.length ? categories.nodes[0] : null;
   return (
-    <Card className={className} {...rest}>
-      <div className="card-picture">
-        <CardImage thumbnail img={featuredImage} />
-      </div>
+    <Card className={classnames("mb-4", className)} {...rest}>
+      <CardImage top img={featuredImage} />
       <CardBody>
         <CategoryBadge data={category} />
         <CardTitle>

@@ -28,6 +28,15 @@ $box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.3);
 @import "~bootstrap/scss/mixins/_breakpoints.scss";
 @import "~nprogress/nprogress.css";
 
+@mixin overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1.25rem;
+}
+
 main {
   min-height: 40vh;
 }
@@ -61,7 +70,20 @@ $tile-gradient: linear-gradient(
 .header {
   position: relative;
   overflow: hidden;
-  height: 400px;
+  min-height: 40vh;
+  max-height: 40vw;
+
+  .header-overlay {
+    @include overlay;
+    display: flex;
+    align-items: center;
+    padding-top: 8rem;
+    padding-bottom: 4rem;
+  }
+  .header-overlay.dark {
+    background-color: rgba($dark, 0.6);
+    color: $light;
+  }
 }
 
 .hero {
@@ -81,18 +103,6 @@ $tile-gradient: linear-gradient(
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-}
-
-.jumbotron-overlay {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding-top: 8rem;
-  padding-bottom: 4rem;
-  background-color: rgba($dark, 0.6);
-  // background: $bg-gradient;
 }
 
 .card {
@@ -124,6 +134,7 @@ $tile-gradient: linear-gradient(
 }
 
 .card-img-overlay {
+  @include overlay;
   background-color: rgba($dark, 0.4);
 }
 
@@ -244,8 +255,8 @@ $tile-gradient: linear-gradient(
   margin: 1rem 1rem 2rem 1rem;
   border: none;
 
-  .category-overlay {
-    @extend .card-img-overlay;
+  @mixin category-overlay {
+    @include card-img-overlay;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -257,10 +268,10 @@ $tile-gradient: linear-gradient(
 }
 
 .img-container {
+  position: relative;
   width: 100%;
   padding-top: 66.66%; /* 3:2 Aspect Ratio */
-  position: relative;
-  background: $dark;
+  background: $light;
   overflow: hidden;
   > div {
     position: absolute;

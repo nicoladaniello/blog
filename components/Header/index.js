@@ -2,31 +2,15 @@ import React from "react";
 import Navbar from "../Navbar/index.js";
 import classnames from "classnames";
 import Image from "../Image.js";
+import ImageContainer from "../ImageContainer.js";
 
 const Header = ({ page: { title, titleRendered, featuredImage } = {} }) => {
-  const jumboProps = {
-    style: featuredImage
-      ? { backgroundImage: `url('${featuredImage.sourceUrl}')` }
-      : undefined,
-    className: classnames("jumbotron jumbotron-fluid jumbotron-header", {
-      "jumbotron-image": featuredImage
-    })
-  };
-
-  const overlayProps = {
-    className: classnames("d-flex h-100", {
-      "jumbotron-overlay text-light": featuredImage
-    })
-  };
-
   return (
     <div className="header">
-      <Image
-        className="hero"
-        img={{ ...featuredImage, sizes: "100vw" }}
-        role="presentation"
-      />
-      <div {...overlayProps}>
+      <ImageContainer palceholder={featuredImage}>
+        <Image tile img={featuredImage} role="presentation" />
+      </ImageContainer>
+      <div className={classnames("header-overlay", { dark: featuredImage })}>
         <Navbar dark={featuredImage} className="navbar-header" />
         <div className="container h-100">
           <div className="row h-100 align-items-center jusitfy-content-center">
