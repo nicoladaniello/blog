@@ -1,13 +1,14 @@
 import React, { Fragment, useContext } from "react";
 import Head from "next/head";
+import dynamic from "next/dynamic";
 import SettingsContext from "../../../providers/SettingsContext.js";
-import LayoutSidebar from "../../LayoutSidebar/index.js";
 import { stripHtml } from "../../../util.js";
 import Header from "../../Header/index.js";
-import Footer from "../../Footer/index.js";
 
 const Layout = ({ title, description, page = {}, children }) => {
   const { generalSettingsDescription } = useContext(SettingsContext);
+  const LayoutSidebar = dynamic(import("../../LayoutSidebar/index.js"));
+  const Footer = dynamic(import("../../Footer/index.js"));
 
   return (
     <Fragment>
@@ -20,18 +21,20 @@ const Layout = ({ title, description, page = {}, children }) => {
         {!!generalSettingsDescription && (
           <meta name="description" content={generalSettingsDescription} />
         )}
-        <style>
-          {`
-      @font-face {
-        font-family: 'Foo';
-        src: url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
-      }
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+          @font-face {
+            font-family: 'Montserrat';
+            src: url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+          }
 
-      body {
-        font-family: 'Montserrat', sans-serif;
-      }
-    `}
-        </style>
+          body {
+            font-family: 'Montserrat', sans-serif;
+          }
+        `
+          }}
+        />
       </Head>
       <Header page={page} />
       <main className="py-4">
