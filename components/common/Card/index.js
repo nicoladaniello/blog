@@ -1,15 +1,14 @@
 import React from "react";
 import classnames from "classnames";
 
-const Card = ({ transparent, shadow = true, className, children, ...rest }) => {
+const Card = ({ tile, advert, className, children, ...rest }) => {
   return (
     <div
-      {...rest}
       className={classnames(
-        "card",
-        { "card-transparent": transparent, "card-shadow": shadow },
+        { tile, advert, card: !tile && !advert },
         className
       )}
+      {...rest}
     >
       {children}
     </div>

@@ -1,28 +1,37 @@
 import React from "react";
 import Link from "next/link";
-import classnames from "classnames";
 import Card from "../common/Card";
 import CardBody from "../common/Card/CardBody";
 import CardTitle from "../common/Card/CardTitle";
-import CardImage from "../common/Card/CardImage";
 import CategoryBadge from "../CategoryBadge";
 import CardMeta from "../common/Card/CardMeta";
 import TagList from "../TagList";
+import ImageContainer from "../ImageContainer";
+import Image from "../Image";
 
 const Post = ({ post, className, ...rest }) => {
-  const { title, uri, featuredImage, excerpt, tags, categories } = post;
+  const { title, uri, featuredImage, tags, categories } = post;
   const category =
-    categories && categories.nodes.length ? categories.nodes[0] : null;
+    categories && categories.nodes.length
+      ? categories.nodes[categories.nodes.length - 1]
+      : null;
+  const img = {
+    ...featuredImage,
+    sizes: "(max-width: 633px) 100vw, (max-width: 844px) 50vw, 33vw"
+  };
+
   return (
-    <Card className={classnames("mb-4", className)} {...rest}>
-      <CardImage top img={featuredImage} />
+    <Card className={className} {...rest}>
+      {featuredImage && (
+        <ImageContainer>
+          <Image top img={img} />
+        </ImageContainer>
+      )}
       <CardBody>
         <CategoryBadge data={category} />
-        <CardTitle>
-          <Link prefetch href="/posts/[uri]" as={`/posts/${uri}`}>
-            <a>{title}</a>
-          </Link>
-        </CardTitle>
+        <Link prefetch passHref href="/posts/[uri]" as={`/posts/${uri}`}>
+          <CardTitle>{title}</CardTitle>
+        </Link>
         <CardMeta data={post} />
       </CardBody>
       <div className="card-footer">

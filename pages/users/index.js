@@ -7,11 +7,11 @@ import PreFooter from "../../components/PreFooter";
 import withUsers from "../../containers/withUsers";
 
 import Card from "../../components/common/Card";
-import CardImage from "../../components/common/Card/CardImage";
 import CardBody from "../../components/common/Card/CardBody";
 import CardTitle from "../../components/common/Card/CardTitle";
 import CardText from "../../components/common/Card/CardText";
 import NotFound from "../../components/NotFound";
+import Image from "../../components/Image";
 
 const Index = ({ pageData: { pageBy }, usersData: { users } }) => {
   if (!pageBy) pageBy = { title: "Users" };
@@ -25,7 +25,7 @@ const Index = ({ pageData: { pageBy }, usersData: { users } }) => {
           users.nodes.map(user => (
             <Card key={user.id}>
               {!!user.avatar && (
-                <CardImage avatar img={{ sourceUrl: user.avatar.url }} />
+                <Image avatar img={{ sourceUrl: user.avatar.url }} />
               )}
               <CardBody>
                 <CardTitle>

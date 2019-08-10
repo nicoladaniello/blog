@@ -11,7 +11,6 @@ export const getCategory = gql`
         name
         slug
         description
-        featuredImageUrl
         featuredImage {
           id
           sourceUrl
@@ -35,7 +34,13 @@ export const getCategory = gql`
           name
           slug
           description
-          featuredImageUrl
+          featuredImage {
+            id
+            sourceUrl
+            srcSet
+            sizes
+            altText
+          }
         }
         children {
           nodes {
@@ -43,7 +48,13 @@ export const getCategory = gql`
             name
             slug
             description
-            featuredImageUrl
+            featuredImage {
+              id
+              sourceUrl
+              srcSet
+              sizes
+              altText
+            }
           }
         }
       }

@@ -15,7 +15,6 @@ export const getCategories = gql`
         name
         slug
         description
-        featuredImageUrl
         featuredImage {
           id
           sourceUrl

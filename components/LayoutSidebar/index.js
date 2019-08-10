@@ -14,12 +14,8 @@ const LayoutSidebar = () => {
         variables={{ tagSlugIn: ["featured"] }}
         title="Featured posts"
       />
-      <Card
-        shadow={false}
-        className="bg-light border-0 mb-5"
-        style={{ height: "200px" }}
-      >
-        <CardBody className="h-100 d-flex align-items-center justify-content-center">
+      <Card advert>
+        <CardBody>
           <div className="text-center">
             <p style={{ fontSize: "2rem" }}>👍</p>
             <CardTitle>Advertisment</CardTitle>

@@ -13,7 +13,7 @@ const PostList = ({ posts, ...rest }) => {
 
   return (
     <div {...rest}>
-      <div className="card-columns two-columns">
+      <div className="card-columns post-list">
         {posts.nodes.map(post => (
           <Post key={post.id} post={post} />
         ))}

@@ -8,7 +8,12 @@ const Image = ({ top, avatar, tile, img, className, ...rest }) => {
   const { srcSet, sizes, sourceUrl, altText } = img;
   const imgClasses = classnames(
     "img-fluid",
-    { top, avatar, "card-img": !top && !avatar },
+    {
+      "card-img-top": top,
+      "card-img-avatar": avatar,
+      "card-img-tile": tile,
+      "card-img": !top && !avatar
+    },
     className
   );
 

@@ -7,8 +7,14 @@ import ImageContainer from "../ImageContainer.js";
 const Header = ({ page: { title, titleRendered, featuredImage } = {} }) => {
   return (
     <div className="header">
-      <ImageContainer palceholder={featuredImage}>
-        <Image tile img={featuredImage} role="presentation" />
+      <ImageContainer>
+        {featuredImage && (
+          <Image
+            tile
+            img={{ ...featuredImage, sizes: "100vw" }}
+            role="presentation"
+          />
+        )}
       </ImageContainer>
       <div className={classnames("header-overlay", { dark: featuredImage })}>
         <Navbar dark={featuredImage} className="navbar-header" />

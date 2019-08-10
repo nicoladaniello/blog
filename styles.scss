@@ -25,17 +25,9 @@ $navbar-nav-link-padding-x: 0.9rem;
 $box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.3);
 
 @import "~bootstrap/scss/bootstrap.scss";
-@import "~bootstrap/scss/mixins/_breakpoints.scss";
 @import "~nprogress/nprogress.css";
-
-@mixin overlay {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 1.25rem;
-}
+@import "/static/card.scss";
+@import "/static/mixins.scss";
 
 main {
   min-height: 40vh;
@@ -61,12 +53,6 @@ main {
   }
 }
 
-$bg-gradient: linear-gradient(rgba(#000, $alpha: 0), rgba(#000, $alpha: 1));
-$tile-gradient: linear-gradient(
-  rgba(#000, $alpha: 0) 60%,
-  rgba(#000, $alpha: 0.8)
-);
-
 .header {
   position: relative;
   overflow: hidden;
@@ -74,14 +60,17 @@ $tile-gradient: linear-gradient(
   max-height: 40vw;
 
   .header-overlay {
-    @include overlay;
+    @include overlay();
     display: flex;
     align-items: center;
     padding-top: 8rem;
     padding-bottom: 4rem;
   }
+  .header-overlay:not(.dark) {
+    background-color: transparent;
+    color: $dark;
+  }
   .header-overlay.dark {
-    background-color: rgba($dark, 0.6);
     color: $light;
   }
 }
@@ -103,67 +92,6 @@ $tile-gradient: linear-gradient(
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-}
-
-.card {
-  &.card-shadow {
-    box-shadow: $box-shadow;
-  }
-
-  &.card-transparent {
-    box-shadow: none;
-    background-color: transparent;
-    border: none;
-
-    .card-img,
-    .card-img-top {
-      box-shadow: $box-shadow;
-    }
-  }
-
-  .card-img-avatar {
-    width: 96px;
-    height: 96px;
-    border-radius: 50%;
-    margin: 2rem auto 0rem auto;
-
-    + .card-body .card-title {
-      text-align: center;
-    }
-  }
-}
-
-.card-img-overlay {
-  @include overlay;
-  background-color: rgba($dark, 0.4);
-}
-
-.avatar {
-  width: 96px;
-  height: 96px;
-  border-radius: 50%;
-}
-
-.card-title {
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-
-  > a {
-    color: $dark;
-    transition: all 200ms ease-in-out;
-
-    &:hover {
-      text-decoration: none;
-      color: $primary;
-    }
-  }
-}
-.card-text {
-  @extend .text-muted;
-  @extend .small;
-}
-.card-footer {
-  background-color: inherit;
 }
 
 .footer {
@@ -218,53 +146,6 @@ $tile-gradient: linear-gradient(
   position: fixed;
   top: 10px;
   left: 10px;
-}
-
-.card-columns.two-columns {
-  @include media-breakpoint-only(xl) {
-    column-count: 2;
-  }
-  @include media-breakpoint-only(lg) {
-    column-count: 2;
-  }
-  @include media-breakpoint-only(md) {
-    column-count: 2;
-  }
-  @include media-breakpoint-only(sm) {
-    column-count: 1;
-  }
-  @include media-breakpoint-only(xs) {
-    column-count: 1;
-  }
-}
-
-.category-list {
-  display: flex;
-  flex-wrap: wrap;
-  overflow-x: scroll;
-  padding: 1rem;
-}
-
-.category {
-  display: inline-block;
-  width: 200px;
-  min-width: 200px;
-  height: 200px;
-  color: $white;
-  background-color: $dark;
-  margin: 1rem 1rem 2rem 1rem;
-  border: none;
-
-  @mixin category-overlay {
-    @include card-img-overlay;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .card-title {
-    color: $light;
-  }
 }
 
 .img-container {

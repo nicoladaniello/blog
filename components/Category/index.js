@@ -2,18 +2,24 @@ import React from "react";
 import Card from "../common/Card";
 import CardText from "../common/Card/CardText";
 import Link from "next/link";
-import CardImage from "../common/Card/CardImage";
+import Image from "../Image";
+import CardTitle from "../common/Card/CardTitle";
 
 const Category = ({
   category: { name, slug, description, featuredImage } = {}
 }) => {
   return (
-    <Card className="category">
-      <CardImage tile img={featuredImage} />
-      <div className="category-overlay">
+    <Card tile>
+      <Image tile img={featuredImage} />
+      <div className="tile-overlay">
         <div className="text-center">
-          <Link prefetch href="/categories/[slug]" as={`/categories/${slug}`}>
-            <a className="card-title stretched-link">{name}</a>
+          <Link
+            prefetch
+            passHref
+            href="/categories/[slug]"
+            as={`/categories/${slug}`}
+          >
+            <CardTitle className="stretched-link">{name}</CardTitle>
           </Link>
           <CardText>{description}</CardText>
         </div>

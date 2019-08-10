@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { compose, withProps } from "recompose";
+import { compose, withProps, branch } from "recompose";
 import { withRouter } from "next/router";
 import Link from "next/link";
 import withCategory from "../../containers/withCategory";
@@ -17,7 +17,7 @@ const CategoryPage = ({ categoryData: { category }, router }) => {
         {category ? category.name : `Not found`}
       </h1>
 
-      <Breadcrumbs dark={category && category.featuredImageUrl}>
+      <Breadcrumbs dark={category && category.featuredImage}>
         <BreadcrumbItem>
           <Link prefetch href="/categories">
             <a>Categories</a>
@@ -44,7 +44,7 @@ const CategoryPage = ({ categoryData: { category }, router }) => {
 
   const page = {
     titleRendered: title,
-    featuredImage: { sourceUrl: category.featuredImageUrl }
+    featuredImage: category.featuredImage
   };
 
   return (
@@ -64,5 +64,5 @@ const CategoryPage = ({ categoryData: { category }, router }) => {
 export default compose(
   withRouter,
   withProps(({ router }) => ({ variables: { slug: [router.query.slug] } })),
-  withCategory
+  branch(({ router }) => router.query.slug, withCategory)
 )(CategoryPage);

@@ -6,7 +6,7 @@ const defaultPage = {
 };
 
 const NotFound = ({
-  message = "We couldn't find what you were looking for",
+  message = "This resource is not available at the moment. Sorry! 😳",
   page = defaultPage
 }) => {
   return (
