@@ -5,7 +5,7 @@ import ListGroup from "../../common/ListGroup";
 import Image from "../../Image";
 
 const PostListWidget = ({ postsData: { posts }, title, className }) => {
-  if (!posts) return <div />;
+  if (!posts || !posts.nodes.length) return null;
 
   return (
     <div className={className}>

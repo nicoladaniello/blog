@@ -1,14 +1,13 @@
 import React from "react";
 import Tag from "../../Tag";
 
-const TagListWidget = ({ tagsData, title, className }) => {
-  if (!tagsData || !tagsData.tags)
-    return <div className="alert alert-info">No tags to show</div>;
+const TagListWidget = ({ tagsData: { tags }, title, className }) => {
+  if (!tags || !tags.nodes.length) return null;
 
   return (
     <div className={className}>
       {title && <h5 className="font-weight-bold">{title}</h5>}
-      {tagsData.tags.nodes.map(tag => (
+      {tags.nodes.map(tag => (
         <Tag key={tag.id} tag={tag} />
       ))}
     </div>

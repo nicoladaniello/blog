@@ -1,15 +1,9 @@
 import React from "react";
 import classnames from "classnames";
 
-const Card = ({ tile, advert, className, children, ...rest }) => {
+const Card = ({ post, tile, className, children, ...rest }) => {
   return (
-    <div
-      className={classnames(
-        { tile, advert, card: !tile && !advert },
-        className
-      )}
-      {...rest}
-    >
+    <div className={classnames("card", { post, tile }, className)} {...rest}>
       {children}
     </div>
   );

@@ -9,16 +9,14 @@ import SettingsProvider from "../providers/SettingsProvider";
 import "../styles.scss";
 
 Router.events.on("routeChangeStart", url => {
-  console.log(`Loading ${url}`);
   nprogress.start();
 });
 
 Router.events.on("routeChangeComplete", url => {
-  console.log("Loading complete successfully");
-  nprogress.done();
+  nprogress.inc();
 });
+
 Router.events.on("routeChangeError", url => {
-  console.log("Loading complete with error");
   nprogress.done();
 });
 

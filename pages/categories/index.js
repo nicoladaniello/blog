@@ -1,27 +1,36 @@
 import React from "react";
 import { compose, withProps } from "recompose";
+import nprogress from "nprogress";
 import Layout from "../../components/common/Layout";
 import withCategories from "../../containers/withCategories";
 import CategoryList from "../../components/CategoryList";
 import withPage from "../../containers/withPage";
-import NotFound from "../../components/NotFound";
 
 const Categories = ({
-  pageData: { pageBy },
-  categoriesData: { categories }
+  pageData: { pageBy, loading: pageLoading },
+  categoriesData: { categories, loading: dataLoading }
 }) => {
+  if (process.browser) {
+    if (!pageLoading) nprogress.inc();
+    if (!dataLoading) nprogress.inc();
+    if (!pageLoading && !dataLoading) nprogress.done();
+  }
+  if (pageLoading) return <Layout />;
   if (!pageBy) pageBy = { title: "Categories" };
-  if (!categories) return <NotFound page={pageBy} />;
 
   return (
     <Layout page={pageBy}>
-      <CategoryList categories={categories} />
+      {dataLoading ? (
+        <div className="spinner-border" />
+      ) : (
+        <CategoryList categories={categories} />
+      )}
     </Layout>
   );
 };
 
 export default compose(
-  withProps(() => ({ variables: { uri: "categories" } })),
-  withPage,
-  withCategories
+  withCategories,
+  withProps(() => ({ variables: { uri: "np_categories" } })),
+  withPage
 )(Categories);

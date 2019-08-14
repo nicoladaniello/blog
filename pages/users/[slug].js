@@ -1,14 +1,16 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { withRouter } from "next/router";
+import nprogress from "nprogress";
 import Layout from "../../components/common/Layout";
 import { compose } from "recompose";
 import withUser from "../../containers/withUser";
-import ErrorMessage from "../../components/ErrorMessage";
 import Image from "../../components/Image";
 import PostList from "../../components/PostList";
 import NotFound from "../../components/NotFound";
 
-const User = ({ userData: { user } }) => {
+const User = ({ userData: { user, loading } }) => {
+  if (process.browser && !loading) nprogress.done();
+  if (loading) return <Layout />;
   if (!user) return <NotFound />;
 
   const page = user.avatar

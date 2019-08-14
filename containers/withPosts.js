@@ -91,13 +91,14 @@ function loadMorePosts({ posts: { pageInfo }, fetchMore }, vars) {
 
 const withPosts = graphql(getPosts, {
   options: ({ variables }) => ({ variables }),
-  props: ({ data }) => ({
-    postsData: {
-      ...data,
-      onLoadMore: () => {
+  props: ({ data, variables }) => {
+    if (data.posts)
+      data.posts.onLoadMore = () => {
         loadMorePosts(data, variables);
-      }
-    }
-  })
+      };
+    return {
+      postsData: data
+    };
+  }
 });
 export default withPosts;

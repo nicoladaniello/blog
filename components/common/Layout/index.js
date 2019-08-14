@@ -5,7 +5,7 @@ import SettingsContext from "../../../providers/SettingsContext.js";
 import { stripHtml } from "../../../util.js";
 import Header from "../../Header/index.js";
 
-const Layout = ({ title, page = {}, children }) => {
+const Layout = ({ title, page = {}, loaders = [], children }) => {
   const { generalSettingsDescription } = useContext(SettingsContext);
   const LayoutSidebar = dynamic(import("../../LayoutSidebar/index.js"));
   const Footer = dynamic(import("../../Footer/index.js"));
@@ -40,7 +40,7 @@ const Layout = ({ title, page = {}, children }) => {
       <main className="py-4">
         <div className="container">
           <div className="row justify-content-around">
-            <div className="col-md-8 col-xs-12">
+            <div className="col-md-8 px-md-4 col-xs-12">
               {!!page && !!page.content && (
                 <section>
                   <div dangerouslySetInnerHTML={{ __html: page.content }} />

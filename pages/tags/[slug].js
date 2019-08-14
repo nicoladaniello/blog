@@ -1,12 +1,15 @@
 import React from "react";
 import { compose, withProps } from "recompose";
 import { withRouter } from "next/router";
+import nprogress from "nprogress";
 import Layout from "../../components/common/Layout";
 import PostList from "../../components/PostList";
 import withTag from "../../containers/withTag";
 import NotFound from "../../components/NotFound";
 
-const Tag = ({ tagData: { tag }, router }) => {
+const Tag = ({ tagData: { tag, loading }, router }) => {
+  if (process.browser && !loading) nprogress.done();
+  if (loading) return <Layout />;
   if (!tag) return <NotFound />;
 
   return (

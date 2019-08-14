@@ -15,12 +15,14 @@ export const getCategories = gql`
         name
         slug
         description
-        featuredImage {
-          id
-          sourceUrl
-          srcSet
-          sizes
-          altText
+        customFields {
+          featuredImage {
+            id
+            sourceUrl
+            srcSet
+            sizes
+            altText
+          }
         }
       }
     }

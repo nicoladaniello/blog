@@ -2,7 +2,7 @@ import React from "react";
 import classnames from "classnames";
 import LazyLoad from "react-lazy-load";
 
-const Image = ({ top, avatar, tile, img, className, ...rest }) => {
+const Image = ({ top, avatar, tile, img, className, lazy = true, ...rest }) => {
   if (!img) return null;
 
   const { srcSet, sizes, sourceUrl, altText } = img;
@@ -17,17 +17,21 @@ const Image = ({ top, avatar, tile, img, className, ...rest }) => {
     className
   );
 
-  return (
-    <LazyLoad offsetVertical={300}>
-      <img
-        className={imgClasses}
-        src={sourceUrl}
-        srcSet={srcSet}
-        sizes={sizes}
-        alt={altText}
-        {...rest}
-      />
-    </LazyLoad>
+  const comp = (
+    <img
+      className={imgClasses}
+      src={sourceUrl}
+      srcSet={srcSet}
+      sizes={sizes}
+      alt={altText}
+      {...rest}
+    />
+  );
+
+  return lazy ? (
+    <LazyLoad offsetVertical={300}>{comp}</LazyLoad>
+  ) : (
+    <div>{comp}</div>
   );
 };
 

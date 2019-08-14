@@ -11,17 +11,21 @@ const PostList = ({ posts, ...rest }) => {
       </div>
     );
 
+  const { nodes, pageInfo, onLoadMore } = posts;
+
   return (
     <div {...rest}>
       <div className="card-columns post-list">
-        {posts.nodes.map(post => (
-          <Post key={post.id} post={post} />
+        {nodes.map(post => (
+          <div key={post.id} className="pt-3 px-1">
+            <Post post={post} className="mb-3" />
+          </div>
         ))}
       </div>
 
       <div className="text-center">
-        {posts.pageInfo && posts.pageInfo.hasNextPage && (
-          <button className="btn btn-light" onClick={posts.onLoadMore}>
+        {pageInfo && pageInfo.hasNextPage && (
+          <button className="btn btn-light" onClick={onLoadMore}>
             Load more
           </button>
         )}

@@ -5,7 +5,9 @@ const PostTile = ({ post, className }) => {
   const { title, uri, featuredImage } = post;
   return (
     <Tile img={featuredImage} uri={uri} className={className}>
-      <CardTitle title={title} href="/posts/[uri]" as={`/posts/${uri}`} />
+      <CardTitle href="/posts/[uri]" as={`/posts/${uri}`}>
+        {title}
+      </CardTitle>
     </Tile>
   );
 };

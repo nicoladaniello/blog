@@ -11,6 +11,7 @@ const Header = ({ page: { title, titleRendered, featuredImage } = {} }) => {
         {featuredImage && (
           <Image
             tile
+            lazy={false}
             img={{ ...featuredImage, sizes: "100vw" }}
             role="presentation"
           />
@@ -21,7 +22,9 @@ const Header = ({ page: { title, titleRendered, featuredImage } = {} }) => {
         <div className="container h-100">
           <div className="row h-100 align-items-center jusitfy-content-center">
             <div className="col-lg-6 col-md-8 col-sm-12">
-              {!!title && <h1 className="h2 font-weight-bold">{title}</h1>}
+              {!!title && !titleRendered && (
+                <h1 className="h2 font-weight-bold">{title}</h1>
+              )}
               {titleRendered}
             </div>
           </div>

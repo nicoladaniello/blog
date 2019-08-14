@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 import Card from "../common/Card";
 import CardBody from "../common/Card/CardBody";
 import CardTitle from "../common/Card/CardTitle";
@@ -21,7 +20,7 @@ const Post = ({ post, className, ...rest }) => {
   };
 
   return (
-    <Card className={className} {...rest}>
+    <Card post className={className} {...rest}>
       {featuredImage && (
         <ImageContainer>
           <Image top img={img} />
@@ -29,9 +28,9 @@ const Post = ({ post, className, ...rest }) => {
       )}
       <CardBody>
         <CategoryBadge data={category} />
-        <Link prefetch passHref href="/posts/[uri]" as={`/posts/${uri}`}>
-          <CardTitle>{title}</CardTitle>
-        </Link>
+        <CardTitle href="/posts/[uri]" as={`/posts/${uri}`}>
+          {title}
+        </CardTitle>
         <CardMeta data={post} />
       </CardBody>
       <div className="card-footer">

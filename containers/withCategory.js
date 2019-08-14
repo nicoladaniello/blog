@@ -11,12 +11,14 @@ export const getCategory = gql`
         name
         slug
         description
-        featuredImage {
-          id
-          sourceUrl
-          srcSet
-          sizes
-          altText
+        customFields {
+          featuredImage {
+            id
+            sourceUrl
+            srcSet
+            sizes
+            altText
+          }
         }
         posts {
           pageInfo {
@@ -34,12 +36,14 @@ export const getCategory = gql`
           name
           slug
           description
-          featuredImage {
-            id
-            sourceUrl
-            srcSet
-            sizes
-            altText
+          customFields {
+            featuredImage {
+              id
+              sourceUrl
+              srcSet
+              sizes
+              altText
+            }
           }
         }
         children {
@@ -48,12 +52,14 @@ export const getCategory = gql`
             name
             slug
             description
-            featuredImage {
-              id
-              sourceUrl
-              srcSet
-              sizes
-              altText
+            customFields {
+              featuredImage {
+                id
+                sourceUrl
+                srcSet
+                sizes
+                altText
+              }
             }
           }
         }
